@@ -81,6 +81,7 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
               ] else ...[
                 widget.items[_currentIndex],
               ],
+              const SizedBox(width: denseSpacing),
               if (!widget.hideIcon)
                 RotationTransition(
                   turns: _rotateAnimation,
@@ -136,47 +137,59 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
                 offset: Offset(0, size.height),
                 link: _layerLink,
                 showWhenUnlinked: false,
-                child: Material(
-                  borderRadius: BorderRadius.zero,
-                  child: SizeTransition(
-                    axisAlignment: 1,
-                    sizeFactor: _expandAnimation,
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints(
-                        maxHeight:
-                            MediaQuery.of(context).size.height - topOffset - 15,
-                      ),
-                      child: ListView(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        children: widget.items.asMap().entries.map((item) {
-                          return InkWell(
-                            onTap: () {
-                              _toggleDropdown();
-                            },
-                            child: Row(
-                              children: [
-                                ValueListenableBuilder<bool>(
-                                    valueListenable: item.value.isChecked,
-                                    builder: (context, value, child) {
-                                      return Checkbox(
-                                          checkColor: Colors.white,
-                                          fillColor:
-                                              MaterialStateProperty.resolveWith(
-                                                  getColor),
-                                          value: item.value.isChecked.value,
-                                          onChanged: (bool value) {
-                                            setState(() {
-                                              item.value.isChecked.value =
-                                                  value;
+                child: Container(
+                  decoration: const BoxDecoration(
+                    border: Border(
+                      left: BorderSide(
+                          color: Color.fromARGB(255, 128, 128, 128)),
+                      right: BorderSide(
+                          color: Color.fromARGB(255, 128, 128, 128)),
+                      bottom: BorderSide(
+                          color: Color.fromARGB(255, 128, 128, 128)),
+                    ),
+                  ),
+                  child: Material(
+                    borderRadius: BorderRadius.zero,
+                    child: SizeTransition(
+                      axisAlignment: 1,
+                      sizeFactor: _expandAnimation,
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxHeight: MediaQuery.of(context).size.height -
+                              topOffset -
+                              15,
+                        ),
+                        child: ListView(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          children: widget.items.asMap().entries.map((item) {
+                            return InkWell(
+                              onTap: () {
+                                _toggleDropdown();
+                              },
+                              child: Row(
+                                children: [
+                                  ValueListenableBuilder<bool>(
+                                      valueListenable: item.value.isChecked,
+                                      builder: (context, value, child) {
+                                        return Checkbox(
+                                            checkColor: Colors.white,
+                                            fillColor: MaterialStateProperty
+                                                .resolveWith(getColor),
+                                            value: item.value.isChecked.value,
+                                            onChanged: (bool value) {
+                                              setState(() {
+                                                item.value.isChecked.value =
+                                                    value;
+                                              });
                                             });
-                                          });
-                                    }),
-                                item.value,
-                              ],
-                            ),
-                          );
-                        }).toList(),
+                                      }),
+                                  item.value,
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                        ),
                       ),
                     ),
                   ),
@@ -192,13 +205,16 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
   void _toggleDropdown({bool close = false}) async {
     if (_isOpen || close) {
       await _animationController.reverse();
-      _overlayEntry.remove();
+      if (_overlayEntry != null ) {
+        _overlayEntry.remove();
+        _overlayEntry = null;
+      }
       setState(() => _isOpen = false);
     } else {
       _overlayEntry = _createOverlayEntry();
       Overlay.of(context).insert(_overlayEntry);
       setState(() => _isOpen = true);
-      _animationController.forward();
+      await _animationController.forward();
     }
   }
 }

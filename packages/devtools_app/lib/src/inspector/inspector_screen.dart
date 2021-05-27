@@ -222,6 +222,7 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
                 value: item.key + 1,
                 child: Text(
                   item.value,
+                  style: const TextStyle(fontSize: 12),
                 ),
                 isChecked: ValueNotifier<bool>(true),
               ),
