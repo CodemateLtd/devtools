@@ -4,6 +4,7 @@
 
 import 'dart:collection';
 
+import 'package:devtools_app/src/ui/toggle_dropdown_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:vm_service/vm_service.dart' hide Stack;
@@ -202,9 +203,30 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
         extensions: [extensions.slowAnimations],
       ),
       const SizedBox(width: denseSpacing),
-      ServiceExtensionButtonGroup(
-        minIncludeTextWidth: 1050,
+      ToggleDropdownButton<int>(
+        title: ToggleDropdownTitle(
+          icon: Icons.zoom_out_map_sharp,
+          title: 'Show Guidelines',
+        ),
         extensions: [extensions.debugPaint, extensions.debugPaintBaselines],
+        items: [
+          'Margins & Paddings',
+          'Show Clickable areas',
+          'Show Scroll areas',
+          'Show Baselines',
+        ]
+            .asMap()
+            .entries
+            .map(
+              (item) => DropdownItem<int>(
+                value: item.key + 1,
+                child: Text(
+                  item.value,
+                ),
+                isChecked: ValueNotifier<bool>(true),
+              ),
+            )
+            .toList(),
       ),
       const SizedBox(width: denseSpacing),
       ServiceExtensionButtonGroup(
