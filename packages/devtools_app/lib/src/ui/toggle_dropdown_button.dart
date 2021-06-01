@@ -1,3 +1,4 @@
+import 'package:devtools_app/src/ui/label.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../auto_dispose_mixin.dart';
@@ -10,12 +11,12 @@ class ToggleDropdownButton<T> extends StatefulWidget {
   const ToggleDropdownButton({
     Key key,
     this.hideIcon = false,
-    @required this.title,
+    this.minIncludeTextWidth,
     @required this.extensions,
     @required this.items,
   }) : super(key: key);
 
-  final Widget title;
+  final double minIncludeTextWidth;
   final List<DropdownItem<T>> items;
   final bool hideIcon;
   final List<ToggleableServiceExtensionDescription> extensions;
@@ -114,7 +115,6 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
         },
         child: Container(
           height: defaultButtonHeight,
-          padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
             color: toggleOn
                 ? theme.colorScheme.toggleButtonBackgroundColor
@@ -127,11 +127,17 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
           child: Row(
             children: [
               if (_currentIndex == -1) ...[
-                widget.title,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
+                  child: ImageIconLabel(
+                    widget.extensions[0].icon,
+                    'Show Guidelines',
+                    minIncludeTextWidth: widget.minIncludeTextWidth,
+                  ),
+                ),
               ] else ...[
                 widget.items[_currentIndex],
               ],
-              const SizedBox(width: denseSpacing),
               if (!widget.hideIcon)
                 RotationTransition(
                   turns: _rotateAnimation,
@@ -307,29 +313,5 @@ class DropdownItem<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return child;
-  }
-}
-
-class ToggleDropdownTitle extends StatelessWidget {
-  final String title;
-  final IconData icon;
-
-  ToggleDropdownTitle({Key key, @required this.title, @required this.icon})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const SizedBox(width: 8),
-        Icon(
-          icon,
-          size: defaultIconSize,
-          color: const Color.fromARGB(255, 128, 128, 128),
-        ),
-        const SizedBox(width: 8),
-        Text(title),
-      ],
-    );
   }
 }

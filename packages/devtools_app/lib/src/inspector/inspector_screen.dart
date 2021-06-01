@@ -204,10 +204,7 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
       ),
       const SizedBox(width: denseSpacing),
       ToggleDropdownButton<int>(
-        title: ToggleDropdownTitle(
-          icon: Icons.zoom_out_map_sharp,
-          title: 'Show Guidelines',
-        ),
+        minIncludeTextWidth: 1150,
         extensions: [extensions.debugPaint, extensions.debugPaintBaselines],
         items: [
           'Margins & Paddings',
