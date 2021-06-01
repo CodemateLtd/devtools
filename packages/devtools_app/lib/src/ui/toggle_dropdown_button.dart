@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import '../auto_dispose_mixin.dart';
+import '../globals.dart';
 import '../service_extensions.dart';
 import '../theme.dart';
+import 'service_extension_widgets.dart';
 
 class ToggleDropdownButton<T> extends StatefulWidget {
   const ToggleDropdownButton({
@@ -23,7 +26,7 @@ class ToggleDropdownButton<T> extends StatefulWidget {
 }
 
 class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, AutoDisposeMixin {
   final LayerLink _layerLink = LayerLink();
   OverlayEntry _overlayEntry;
   bool _isOpen = false;
@@ -33,10 +36,15 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
   Animation<double> _rotateAnimation;
   bool toggleOn = false;
 
+  List<ExtensionState> _extensionStates;
+
   @override
   void initState() {
     super.initState();
-
+    // To use ToggleButtons we have to track states for all buttons in the
+    // group here rather than tracking state with the individual button widgets
+    // which would be more natural.
+    _initExtensionState();
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 200));
     _expandAnimation = CurvedAnimation(
@@ -47,6 +55,48 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
       parent: _animationController,
       curve: Curves.easeInOut,
     ));
+  }
+
+  void _initExtensionState() {
+    _extensionStates = [for (var e in widget.extensions) ExtensionState(e)];
+
+    for (var extension in _extensionStates) {
+      // Listen for changes to the state of each service extension using the
+      // VMServiceManager.
+      final extensionName = extension.description.extension;
+      // Update the button state to match the latest state on the VM.
+      final state = serviceManager.serviceExtensionManager
+          .getServiceExtensionState(extensionName);
+      extension.isSelected = state.value.enabled;
+
+      addAutoDisposeListener(state, () {
+        setState(() {
+          extension.isSelected = state.value.enabled;
+        });
+      });
+      // Track whether the extension is actually exposed by the VM.
+      final listenable = serviceManager.serviceExtensionManager
+          .hasServiceExtension(extensionName);
+      extension.isAvailable = listenable.value;
+      addAutoDisposeListener(
+        listenable,
+        () {
+          setState(() {
+            extension.isAvailable = listenable.value;
+          });
+        },
+      );
+    }
+  }
+
+  @override
+  void didUpdateWidget(ToggleDropdownButton oldWidget) {
+    if (!listEquals(oldWidget.extensions, widget.extensions)) {
+      cancel();
+      _initExtensionState();
+      setState(() {});
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -60,7 +110,7 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
           setState(() {
             !toggleOn ? toggleOn = true : toggleOn = false;
           });
-          print('Toggle pressed');
+          _onPressed(_extensionStates[0]); //todo: fix index
         },
         child: Container(
           height: defaultButtonHeight,
@@ -140,12 +190,12 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
                 child: Container(
                   decoration: const BoxDecoration(
                     border: Border(
-                      left: BorderSide(
-                          color: Color.fromARGB(255, 128, 128, 128)),
-                      right: BorderSide(
-                          color: Color.fromARGB(255, 128, 128, 128)),
-                      bottom: BorderSide(
-                          color: Color.fromARGB(255, 128, 128, 128)),
+                      left:
+                          BorderSide(color: Color.fromARGB(255, 128, 128, 128)),
+                      right:
+                          BorderSide(color: Color.fromARGB(255, 128, 128, 128)),
+                      bottom:
+                          BorderSide(color: Color.fromARGB(255, 128, 128, 128)),
                     ),
                   ),
                   child: Material(
@@ -205,7 +255,7 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
   void _toggleDropdown({bool close = false}) async {
     if (_isOpen || close) {
       await _animationController.reverse();
-      if (_overlayEntry != null ) {
+      if (_overlayEntry != null) {
         _overlayEntry.remove();
         _overlayEntry = null;
       }
@@ -215,6 +265,28 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
       Overlay.of(context).insert(_overlayEntry);
       setState(() => _isOpen = true);
       await _animationController.forward();
+    }
+  }
+
+  void _onPressed(ExtensionState exState) {
+    if (exState.isAvailable) {
+      setState(() {
+        final wasSelected = exState.isSelected;
+        // TODO(jacobr): support analytics.
+        // ga.select(extensionDescription.gaScreenName, extensionDescription.gaItem);
+
+        serviceManager.serviceExtensionManager.setServiceExtensionState(
+          exState.description.extension,
+          !wasSelected,
+          wasSelected
+              ? exState.description.disabledValue
+              : exState.description.enabledValue,
+        );
+      });
+    } else {
+      // TODO(jacobr): display a toast warning that the extension is
+      // not available. That could happen as entire groups have to
+      // be enabled or disabled at a time.
     }
   }
 }
