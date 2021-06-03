@@ -111,7 +111,7 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
           setState(() {
             !toggleOn ? toggleOn = true : toggleOn = false;
           });
-          _onPressed(_extensionStates[0]); //todo: fix index
+          _onPressed(_extensionStates);
         },
         child: Container(
           height: defaultButtonHeight,
@@ -128,7 +128,8 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
             children: [
               if (_currentIndex == -1) ...[
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: defaultSpacing),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: defaultSpacing),
                   child: ImageIconLabel(
                     widget.extensions[0].icon,
                     'Show Guidelines',
@@ -274,19 +275,43 @@ class _ToggleDropdownButtonState<T> extends State<ToggleDropdownButton<T>>
     }
   }
 
-  void _onPressed(ExtensionState exState) {
-    if (exState.isAvailable) {
+  void _onPressed(List<ExtensionState> extensionStates) {
+    //TODO: Add logic to checkboxes and extenstionstates to pick what extensions you want
+    final debugPaintExtension = _extensionStates[0];
+    final debugPaintBaselinesExtension = _extensionStates[1];
+
+    if (debugPaintExtension.isAvailable) {
       setState(() {
-        final wasSelected = exState.isSelected;
+        final wasSelected = debugPaintExtension.isSelected;
         // TODO(jacobr): support analytics.
         // ga.select(extensionDescription.gaScreenName, extensionDescription.gaItem);
 
         serviceManager.serviceExtensionManager.setServiceExtensionState(
-          exState.description.extension,
+          debugPaintExtension.description.extension,
           !wasSelected,
           wasSelected
-              ? exState.description.disabledValue
-              : exState.description.enabledValue,
+              ? debugPaintExtension.description.disabledValue
+              : debugPaintExtension.description.enabledValue,
+        );
+      });
+    } else {
+      // TODO(jacobr): display a toast warning that the extension is
+      // not available. That could happen as entire groups have to
+      // be enabled or disabled at a time.
+    }
+
+    if (debugPaintBaselinesExtension.isAvailable) {
+      setState(() {
+        final wasSelected = debugPaintBaselinesExtension.isSelected;
+        // TODO(jacobr): support analytics.
+        // ga.select(extensionDescription.gaScreenName, extensionDescription.gaItem);
+
+        serviceManager.serviceExtensionManager.setServiceExtensionState(
+          debugPaintBaselinesExtension.description.extension,
+          !wasSelected,
+          wasSelected
+              ? debugPaintBaselinesExtension.description.disabledValue
+              : debugPaintBaselinesExtension.description.enabledValue,
         );
       });
     } else {
