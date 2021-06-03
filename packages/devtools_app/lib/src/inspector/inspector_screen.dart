@@ -11,7 +11,7 @@ import 'package:vm_service/vm_service.dart' hide Stack;
 
 import '../analytics/analytics_stub.dart'
     if (dart.library.html) '../analytics/analytics.dart' as ga;
-import '../analytics/constants.dart';
+import '../analytics/constants.dart' as analytics_constants;
 import '../auto_dispose_mixin.dart';
 import '../blocking_action_mixin.dart';
 import '../common_widgets.dart';
@@ -79,7 +79,7 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
     ga.screen(InspectorScreen.id);
     autoDispose(
         serviceManager.onConnectionAvailable.listen(_handleConnectionStart));
-    if (serviceManager.hasConnection) {
+    if (serviceManager.connectedAppInitialized) {
       _handleConnectionStart(serviceManager.service);
     }
     autoDispose(
@@ -349,7 +349,7 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
   }
 
   void _refreshInspector() {
-    ga.select(inspector, refresh);
+    ga.select(analytics_constants.inspector, analytics_constants.refresh);
     blockWhileInProgress(() async {
       await inspectorController?.onForceRefresh();
     });
