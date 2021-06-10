@@ -10,7 +10,7 @@ import 'package:devtools_app/src/utils.dart';
 import 'package:devtools_testing/support/cpu_profile_test_data.dart';
 import 'package:devtools_testing/support/performance_test_data.dart';
 import 'package:devtools_testing/support/test_utils.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('PerformanceData', () {
@@ -120,15 +120,6 @@ void main() {
         equals(1),
       );
       expect(performanceData.eventGroups['A'].rows[0].events.length, equals(1));
-    });
-
-    test('event bucket compare', () {
-      expect(PerformanceData.eventGroupComparator('UI', 'Raster'), equals(-1));
-      expect(PerformanceData.eventGroupComparator('Raster', 'UI'), equals(1));
-      expect(PerformanceData.eventGroupComparator('UI', 'UI'), equals(0));
-      expect(PerformanceData.eventGroupComparator('UI', 'Async'), equals(-1));
-      expect(PerformanceData.eventGroupComparator('A', 'B'), equals(-1));
-      expect(PerformanceData.eventGroupComparator('Z', 'Unknown'), equals(-1));
     });
   });
 

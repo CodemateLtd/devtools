@@ -19,6 +19,7 @@ import 'package:vm_service/vm_service.dart';
 import '../auto_dispose.dart';
 import '../eval_on_dart_library.dart';
 import '../globals.dart';
+import '../utils.dart';
 import 'diagnostics_node.dart';
 import 'inspector_service_polyfill.dart';
 
@@ -28,18 +29,6 @@ const inspectorLibraryUriCandidates = [
   'package:flutter/src/widgets/widget_inspector.dart',
   'package:flutter_web/src/widgets/widget_inspector.dart',
 ];
-
-bool _inspectorDependenciesLoaded = false;
-
-/// This method must be called before any methods on the Inspector are used.
-Future<void> ensureInspectorServiceDependencies() async {
-  if (_inspectorDependenciesLoaded) {
-    return;
-  }
-  // TODO(jacobr): consider also loading common icons needed by the inspector
-  // to avoid flicker on icon load.
-  _inspectorDependenciesLoaded = true;
-}
 
 class RegistrableServiceExtension {
   const RegistrableServiceExtension(this.name);
@@ -93,12 +82,10 @@ class InspectorService extends DisposableController
     VmService vmService,
     String groupName,
   ) async {
-    assert(_inspectorDependenciesLoaded);
     return (await create(vmService)).createObjectGroup(groupName);
   }
 
   static Future<InspectorService> create(VmService vmService) async {
-    assert(_inspectorDependenciesLoaded);
     assert(serviceManager.connectedAppInitialized);
     assert(serviceManager.service != null);
     final inspectorLibrary = EvalOnDartLibrary(
@@ -1129,7 +1116,7 @@ class ObjectGroup implements Disposable {
     final Map<String, InstanceRef> properties = {};
     for (FieldRef field in clazz.fields) {
       final String name = field.name;
-      if (name.startsWith('_')) {
+      if (isPrivate(name)) {
         // Needed to filter out _deleted_enum_sentinel synthetic property.
         // If showing enum values is useful we could special case
         // just the _deleted_enum_sentinel property name.

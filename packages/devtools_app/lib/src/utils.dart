@@ -21,10 +21,12 @@ import 'config_specific/logger/logger.dart' as logger;
 import 'globals.dart';
 import 'notifications.dart';
 
+bool isPrivate(String member) => member.startsWith('_');
+
 /// Public properties first, then sort alphabetically
 int sortFieldsByName(String a, String b) {
-  final isAPrivate = a.startsWith('_');
-  final isBPrivate = b.startsWith('_');
+  final isAPrivate = isPrivate(a);
+  final isBPrivate = isPrivate(b);
 
   if (isAPrivate && !isBPrivate) {
     return 1;
@@ -1293,5 +1295,13 @@ mixin CompareMixin implements Comparable {
 
   bool operator >=(other) {
     return compareTo(other) >= 0;
+  }
+}
+
+extension BoolExtension on bool {
+  int boolCompare(bool other) {
+    if ((this && other) || (!this && !other)) return 0;
+    if (other) return 1;
+    return -1;
   }
 }

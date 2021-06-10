@@ -9,8 +9,7 @@ import 'dart:async';
 
 import 'package:devtools_app/src/inspector/diagnostics_node.dart';
 import 'package:devtools_app/src/inspector/inspector_service.dart';
-import 'package:flutter_test/flutter_test.dart' show equalsIgnoringHashCodes;
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import 'matchers/matchers.dart';
 import 'support/flutter_test_driver.dart' show FlutterRunConfiguration;
@@ -18,10 +17,6 @@ import 'support/flutter_test_environment.dart';
 
 Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
   InspectorService inspectorService;
-
-  env.afterNewSetup = () async {
-    await ensureInspectorServiceDependencies();
-  };
 
   env.afterEverySetup = () async {
     inspectorService = await InspectorService.create(env.service);
@@ -83,7 +78,7 @@ Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
         expect(await inspectorService.isWidgetCreationTracked(), isTrue);
         await inspectorService.setPubRootDirectories([]);
         final List<String> rootDirectories =
-            await inspectorService.inferPubRootDirectoryIfNeeded();
+        await inspectorService.inferPubRootDirectoryIfNeeded();
         expect(rootDirectories.length, 1);
         expect(rootDirectories.first, endsWith('/fixtures/flutter_app'));
         await group.dispose();
@@ -96,15 +91,24 @@ Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
         expect(await inspectorService.isWidgetCreationTracked(), isTrue);
         await inspectorService.setPubRootDirectories([]);
         final List<String> rootDirectories =
-            await inspectorService.inferPubRootDirectoryIfNeeded();
+        await inspectorService.inferPubRootDirectoryIfNeeded();
         expect(rootDirectories.length, 1);
         expect(rootDirectories.first, endsWith('/fixtures/flutter_app'));
         final originalRootDirectories = rootDirectories.toList();
         try {
           expect(
-            (inspectorService.localClasses.keys.toList()..sort()),
+            (inspectorService.localClasses.keys.toList()
+              ..sort()),
             equals(
-              ['MyApp', 'MyOtherWidget', 'NotAWidget'],
+              ['AnotherClass',
+                'ExportedClass',
+                'FooClass',
+                'MyApp',
+                'MyOtherWidget',
+                'NotAWidget',
+                '_PrivateClass',
+                '_PrivateExportedClass',
+              ],
             ),
           );
 
@@ -113,9 +117,17 @@ Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
           // Adding src does not change the directory as local classes are
           // computed at the library level.
           expect(
-            (inspectorService.localClasses.keys.toList()..sort()),
+            (inspectorService.localClasses.keys.toList()
+              ..sort()),
             equals(
-              ['MyApp', 'MyOtherWidget', 'NotAWidget'],
+              ['AnotherClass',
+                'ExportedClass',
+                'FooClass',
+                'MyApp',
+                'MyOtherWidget',
+                'NotAWidget',
+                '_PrivateClass',
+                '_PrivateExportedClass'],
             ),
           );
 
@@ -178,7 +190,7 @@ Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
         expect(await inspectorService.isWidgetCreationTracked(), isTrue);
         await inspectorService.setPubRootDirectories([]);
         final originalRootDirectories =
-            (await inspectorService.inferPubRootDirectoryIfNeeded()).toList();
+        (await inspectorService.inferPubRootDirectoryIfNeeded()).toList();
         try {
           await inspectorService.setPubRootDirectories(
               ['/usr/me/clients/google3/foo/bar/baz/lib/src/bla']);
@@ -289,37 +301,37 @@ Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
         await env.setupEnvironment();
         final group = inspectorService.createObjectGroup('test-group');
         final RemoteDiagnosticsNode root =
-            await group.getRoot(FlutterTreeType.widget);
+        await group.getRoot(FlutterTreeType.widget);
         // Tree only contains widgets from local app.
         expect(
           treeToDebugString(root),
           equalsIgnoringHashCodes(
             '[root]\n'
-            ' └─MyApp\n'
-            '   └─MaterialApp\n'
-            '     └─Scaffold\n'
-            '       ├─Center\n'
-            '       │ └─Text\n'
-            '       └─AppBar\n'
-            '         └─Text\n',
+                ' └─MyApp\n'
+                '   └─MaterialApp\n'
+                '     └─Scaffold\n'
+                '       ├─Center\n'
+                '       │ └─Text\n'
+                '       └─AppBar\n'
+                '         └─Text\n',
           ),
         );
         RemoteDiagnosticsNode nodeInSummaryTree =
-            findNodeMatching(root, 'MaterialApp');
+        findNodeMatching(root, 'MaterialApp');
         expect(nodeInSummaryTree, isNotNull);
         expect(
           treeToDebugString(nodeInSummaryTree),
           equalsIgnoringHashCodes(
             'MaterialApp\n'
-            ' └─Scaffold\n'
-            '   ├─Center\n'
-            '   │ └─Text\n'
-            '   └─AppBar\n'
-            '     └─Text\n',
+                ' └─Scaffold\n'
+                '   ├─Center\n'
+                '   │ └─Text\n'
+                '   └─AppBar\n'
+                '     └─Text\n',
           ),
         );
         RemoteDiagnosticsNode nodeInDetailsTree =
-            await group.getDetailsSubtree(nodeInSummaryTree);
+        await group.getDetailsSubtree(nodeInSummaryTree);
         // When flutter rolls, this string may sometimes change due to
         // implementation details.
         expect(
@@ -353,7 +365,7 @@ Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
           treeToDebugString(selection),
           equalsIgnoringHashCodes(
             'Text\n'
-            ' └─RichText\n',
+                ' └─RichText\n',
           ),
         );
 
@@ -364,7 +376,7 @@ Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
           treeToDebugString(selection),
           equalsIgnoringHashCodes(
             'RenderParagraph#00000 relayoutBoundary=up2\n'
-            ' └─text: TextSpan\n',
+                ' └─text: TextSpan\n',
           ),
         );
 
@@ -446,7 +458,7 @@ Future<void> runInspectorServiceTests(FlutterTestEnvironment env) async {
 
       // TODO(jacobr): add tests verifying that we can stop the running device
       // without the InspectorService spewing a bunch of errors.
-    }, timeout: const Timeout.factor(8));
+    });
   } catch (e, s) {
     print(s);
   }
