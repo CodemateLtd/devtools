@@ -209,7 +209,7 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
         ],
       ),
       // TODO(jacobr): implement TogglePlatformSelector.
-      //  TogglePlatformSelector().selector*/
+      //  TogglePlatformSelector().selector
     ];
   }
 
