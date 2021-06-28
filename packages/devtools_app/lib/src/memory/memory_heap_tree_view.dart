@@ -579,7 +579,7 @@ class HeapTreeViewState extends State<HeapTree>
             child: OutlinedButton(
               key: snapshotButtonKey,
               onPressed: _isSnapshotRunning ? null : _takeHeapSnapshot,
-              child: const MaterialIconLabel(
+              child: MaterialIconLabel(
                 label: 'Take Heap Snapshot',
                 iconData: Icons.camera,
               ),

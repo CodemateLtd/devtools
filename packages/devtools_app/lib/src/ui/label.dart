@@ -29,15 +29,19 @@ class ImageIconLabel extends StatelessWidget {
 }
 
 class MaterialIconLabel extends StatelessWidget {
-  const MaterialIconLabel({
+  MaterialIconLabel({
     @required this.label,
     this.iconData,
     this.imageIcon,
+    this.iconLabelColorLightMode,
+    this.iconLabelColorDarkMode,
     this.includeTextWidth,
   }) : assert((iconData == null) != (imageIcon == null));
 
   final IconData iconData;
   final Image imageIcon;
+  Color iconLabelColorLightMode = Colors.black;
+  Color iconLabelColorDarkMode = Colors.white;
   final String label;
   final double includeTextWidth;
 
@@ -54,8 +58,8 @@ class MaterialIconLabel extends StatelessWidget {
                 iconData,
                 size: defaultIconSize,
                 color: theme.isDarkTheme
-                    ? const Color(0xFFAEAEB1)
-                    : const Color(0xFF464646),
+                    ? iconLabelColorDarkMode
+                    : iconLabelColorLightMode,
               )
             : imageIcon,
         // TODO(jacobr): animate showing and hiding the text.
@@ -65,7 +69,10 @@ class MaterialIconLabel extends StatelessWidget {
             child: Text(
               label,
               style: TextStyle(
-                  color: theme.colorScheme.serviceExtensionButtonsTitle),
+                color: theme.isDarkTheme
+                    ? iconLabelColorDarkMode
+                    : iconLabelColorLightMode,
+              ),
             ),
           ),
       ],

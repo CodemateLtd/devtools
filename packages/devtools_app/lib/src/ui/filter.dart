@@ -90,7 +90,7 @@ class _FilterDialogState extends State<FilterDialog> {
         dialogTitleText(Theme.of(context), 'Filters'),
         TextButton(
           onPressed: queryTextFieldController.clear,
-          child: const MaterialIconLabel(
+          child: MaterialIconLabel(
             label: 'Reset to default',
             iconData: Icons.replay,
           ),

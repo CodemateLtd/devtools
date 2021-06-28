@@ -136,6 +136,8 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
               onPressed: _refreshInspector,
               icon: Icons.refresh,
               label: 'Refresh Tree',
+              iconLabelColorLightMode: const Color(0xFF464646),
+              iconLabelColorDarkMode: const Color(0xFFAEAEB1),
               includeTextWidth: includeTextWidth,
             ),
             const Spacer(),
