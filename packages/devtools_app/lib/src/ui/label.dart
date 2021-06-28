@@ -53,6 +53,9 @@ class MaterialIconLabel extends StatelessWidget {
             ? Icon(
                 iconData,
                 size: defaultIconSize,
+                color: theme.isDarkTheme
+                    ? const Color(0xFFAEAEB1)
+                    : const Color(0xFF464646),
               )
             : imageIcon,
         // TODO(jacobr): animate showing and hiding the text.
@@ -61,7 +64,8 @@ class MaterialIconLabel extends StatelessWidget {
             padding: const EdgeInsets.only(left: denseSpacing),
             child: Text(
               label,
-              style: TextStyle(color: theme.colorScheme.serviceExtensionButtonsTitle),
+              style: TextStyle(
+                  color: theme.colorScheme.serviceExtensionButtonsTitle),
             ),
           ),
       ],
