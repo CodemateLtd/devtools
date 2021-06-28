@@ -205,7 +205,7 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
           extensions.debugPaint,
           extensions.debugPaintBaselines,
           extensions.repaintRainbow,
-          extensions.invertOversizedImages
+          extensions.invertOversizedImages,
         ],
       ),
       // TODO(jacobr): implement TogglePlatformSelector.
