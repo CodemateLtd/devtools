@@ -117,7 +117,7 @@ class _ServiceExtensionButtonGroupState
         borderRadius: const BorderRadius.all(Radius.circular(4.0)),
         color: theme.colorScheme.serviceExtensionButtonsTitle,
         selectedColor: theme.colorScheme.serviceExtensionButtonsTitleSelected,
-        fillColor: const Color(0xFF0EA7E0),
+        fillColor: theme.colorScheme.serviceExtensionButtonsFillSelected,
         textStyle: theme.textTheme.bodyText1,
         constraints: const BoxConstraints(minWidth: 32.0, minHeight: 32.0),
         children: <Widget>[

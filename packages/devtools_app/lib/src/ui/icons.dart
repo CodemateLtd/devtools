@@ -253,19 +253,19 @@ Image createImageIcon(String url, {double size = defaultIconSize}) {
 
 class ThemedImageIcon extends StatelessWidget {
   const ThemedImageIcon({
-    @required this.lightModeUrl,
-    @required this.darkModeUrl,
+    @required this.lightModeAsset,
+    @required this.darkModeAsset,
   });
 
-  final String lightModeUrl;
-  final String darkModeUrl;
+  final String lightModeAsset;
+  final String darkModeAsset;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Image(
-      image: AssetImage(theme.isDarkTheme ? darkModeUrl : lightModeUrl),
+      image: AssetImage(theme.isDarkTheme ? darkModeAsset : lightModeAsset),
       height: defaultIconSize,
       width: defaultIconSize,
     );
