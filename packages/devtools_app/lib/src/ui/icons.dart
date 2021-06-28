@@ -251,8 +251,8 @@ Image createImageIcon(String url, {double size = defaultIconSize}) {
   );
 }
 
-class ImageIconCreator extends StatelessWidget {
-  const ImageIconCreator({
+class ThemedImageIcon extends StatelessWidget {
+  const ThemedImageIcon({
     @required this.lightModeUrl,
     @required this.darkModeUrl,
   });
@@ -265,9 +265,7 @@ class ImageIconCreator extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Image(
-      image: theme.isDarkTheme
-          ? AssetImage(darkModeUrl)
-          : AssetImage(lightModeUrl),
+      image: AssetImage(theme.isDarkTheme ? darkModeUrl : lightModeUrl),
       height: defaultIconSize,
       width: defaultIconSize,
     );
