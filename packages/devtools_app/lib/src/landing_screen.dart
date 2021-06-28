@@ -91,7 +91,7 @@ class _LandingScreenBodyState extends State<LandingScreenBody>
           const SizedBox(height: defaultSpacing),
           ElevatedButton(
             onPressed: _importFile,
-            child: MaterialIconLabel(
+            child: const MaterialIconLabel(
               label: 'Import File',
               iconData: Icons.file_upload,
             ),

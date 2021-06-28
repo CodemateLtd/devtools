@@ -89,8 +89,7 @@ class IconLabelButton extends StatelessWidget {
     @required this.icon,
     @required this.label,
     @required this.onPressed,
-    this.iconLabelColorLightMode,
-    this.iconLabelColorDarkMode,
+    this.color,
     this.includeTextWidth,
     this.elevatedButton = false,
   }) : super(key: key);
@@ -103,9 +102,7 @@ class IconLabelButton extends StatelessWidget {
 
   final VoidCallback onPressed;
 
-  final Color iconLabelColorLightMode;
-
-  final Color iconLabelColorDarkMode;
+  final Color color;
 
   /// Whether this icon label button should use an elevated button style.
   final bool elevatedButton;
@@ -115,9 +112,8 @@ class IconLabelButton extends StatelessWidget {
     final iconLabel = MaterialIconLabel(
       label: label,
       iconData: icon,
-      iconLabelColorLightMode: iconLabelColorLightMode,
-      iconLabelColorDarkMode: iconLabelColorDarkMode,
       includeTextWidth: includeTextWidth,
+      color: color,
     );
     if (elevatedButton) {
       return ElevatedButton(
@@ -513,7 +509,7 @@ class ExitOfflineButton extends StatelessWidget {
     return OutlinedButton(
       key: const Key('exit offline button'),
       onPressed: onPressed,
-      child: MaterialIconLabel(
+      child: const MaterialIconLabel(
         label: 'Exit offline mode',
         iconData: Icons.clear,
       ),
