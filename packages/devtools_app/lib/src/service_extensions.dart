@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import 'analytics/constants.dart' as analytics_constants;
-import 'theme.dart';
 import 'ui/icons.dart';
 
 // Each service extension needs to be added to [_extensionDescriptions].
@@ -90,8 +89,14 @@ class ServiceExtensionDescription<T> {
 final debugAllowBanner = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.debugAllowBanner',
   description: 'Debug Banner',
-  disabledIcon: createImageIcon('icons/debug_banner@2x.png'),
-  enabledIcon: createImageIcon('icons/debug_banner@2x.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/debug_banner@2x.png',
+    darkModeUrl: 'icons/debug_banner@2x.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/debug_banner@2x.png',
+    darkModeUrl: 'icons/debug_banner@2x.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Hide Debug Banner',
@@ -103,8 +108,14 @@ final debugAllowBanner = ToggleableServiceExtensionDescription<bool>._(
 final invertOversizedImages = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.invertOversizedImages',
   description: 'Invert Oversized Images',
-  disabledIcon: createImageIcon('icons/images-lgrey.png'),
-  enabledIcon: createImageIcon('icons/images-dgrey.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/images-dgrey.png',
+    darkModeUrl: 'icons/images-lgrey.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/images-white.png',
+    darkModeUrl: 'icons/images-dgrey.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Disable Invert Oversized Images',
@@ -116,8 +127,14 @@ final invertOversizedImages = ToggleableServiceExtensionDescription<bool>._(
 final debugPaint = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.debugPaint',
   description: 'Show Guidelines',
-  disabledIcon: createImageIcon('icons/guidelines-lgrey.png'),
-  enabledIcon: createImageIcon('icons/guidelines-dgrey.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/guidelines-dgrey.png',
+    darkModeUrl: 'icons/guidelines-lgrey.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/guidelines-white.png',
+    darkModeUrl: 'icons/guidelines-dgrey.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Hide Debug Paint',
@@ -129,8 +146,14 @@ final debugPaint = ToggleableServiceExtensionDescription<bool>._(
 final debugPaintBaselines = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.debugPaintBaselinesEnabled',
   description: 'Show Baselines',
-  disabledIcon: createImageIcon('icons/baselines-lgrey.png'),
-  enabledIcon: createImageIcon('icons/baselines-dgrey.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/baselines-dgrey.png',
+    darkModeUrl: 'icons/baselines-lgrey.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/baselines-white.png',
+    darkModeUrl: 'icons/baselines-dgrey.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Hide Paint Baselines',
@@ -142,8 +165,14 @@ final debugPaintBaselines = ToggleableServiceExtensionDescription<bool>._(
 final performanceOverlay = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.showPerformanceOverlay',
   description: 'Performance Overlay',
-  disabledIcon: createImageIcon('icons/general/performance_overlay@2x.png'),
-  enabledIcon: createImageIcon('icons/general/performance_overlay@2x.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/general/performance_overlay@2x.png',
+    darkModeUrl: 'icons/general/performance_overlay@2x.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/general/performance_overlay@2x.png',
+    darkModeUrl: 'icons/general/performance_overlay@2x.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Hide Performance Overlay',
@@ -155,8 +184,14 @@ final performanceOverlay = ToggleableServiceExtensionDescription<bool>._(
 final profileWidgetBuilds = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.profileWidgetBuilds',
   description: 'Track Widget Builds',
-  disabledIcon: createImageIcon('icons/widget_tree@2x.png'),
-  enabledIcon: createImageIcon('icons/widget_tree@2x.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/widget_tree@2x.png',
+    darkModeUrl: 'icons/widget_tree@2x.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/widget_tree@2x.png',
+    darkModeUrl: 'icons/widget_tree@2x.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Disable tracking widget builds',
@@ -168,8 +203,14 @@ final profileWidgetBuilds = ToggleableServiceExtensionDescription<bool>._(
 final repaintRainbow = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.repaintRainbow',
   description: 'Highlight Repaints',
-  disabledIcon: createImageIcon('icons/repaints-lgrey.png'),
-  enabledIcon: createImageIcon('icons/repaints-dgrey.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/repaints-dgrey.png',
+    darkModeUrl: 'icons/repaints-lgrey.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/repaints-white.png',
+    darkModeUrl: 'icons/repaints-dgrey.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Hide Repaint Rainbow',
@@ -181,8 +222,14 @@ final repaintRainbow = ToggleableServiceExtensionDescription<bool>._(
 final slowAnimations = ToggleableServiceExtensionDescription<num>._(
   extension: 'ext.flutter.timeDilation',
   description: 'Slow Animations',
-  disabledIcon: createImageIcon('icons/slow-lgrey.png'),
-  enabledIcon: createImageIcon('icons/slow-dgrey.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/slow-dgrey.png',
+    darkModeUrl: 'icons/slow-lgrey.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/slow-white.png',
+    darkModeUrl: 'icons/slow-dgrey.png',
+  ),
   enabledValue: 5.0,
   disabledValue: 1.0,
   enabledTooltip: 'Disable Slow Animations',
@@ -194,8 +241,14 @@ final slowAnimations = ToggleableServiceExtensionDescription<num>._(
 final togglePlatformMode = ServiceExtensionDescription<String>(
   extension: 'ext.flutter.platformOverride',
   description: 'Override target platform',
-  disabledIcon: createImageIcon('icons/phone@2x.png'),
-  enabledIcon: createImageIcon('icons/phone@2x.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/phone@2x.png',
+    darkModeUrl: 'icons/phone@2x.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/phone@2x.png',
+    darkModeUrl: 'icons/phone@2x.png',
+  ),
   values: ['iOS', 'android', 'fuchsia', 'macOS', 'linux'],
   displayValues: [
     'Platform: iOS',
@@ -241,8 +294,14 @@ final toggleOnDeviceWidgetInspector =
   // versions of package:flutter it makes sense to describe this extension as
   // toggling widget select mode as it is the only way to toggle that mode.
   description: 'Select Widget Mode',
-  disabledIcon: createImageIcon('icons/widget-select-lgrey.png'),
-  enabledIcon: createImageIcon('icons/widget-select-dgrey.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/widget-select-dgrey.png',
+    darkModeUrl: 'icons/widget-select-lgrey.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/widget-select-white.png',
+    darkModeUrl: 'icons/widget-select-dgrey.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Disable select widget mode',
@@ -256,8 +315,14 @@ final toggleOnDeviceWidgetInspector =
 final toggleSelectWidgetMode = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.inspector.selectMode',
   description: 'Select widget mode',
-  disabledIcon: createImageIcon('icons/widget-select-lgrey.png'),
-  enabledIcon: createImageIcon('icons/widget-select-dgrey.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/widget-select-dgrey.png',
+    darkModeUrl: 'icons/widget-select-lgrey.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/widget-select-white.png',
+    darkModeUrl: 'icons/widget-select-dgrey.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Exit select widget mode',
@@ -274,8 +339,14 @@ final toggleSelectWidgetMode = ToggleableServiceExtensionDescription<bool>._(
 final enableOnDeviceInspector = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.inspector.enable',
   description: 'Enable on-device inspector',
-  disabledIcon: createImageIcon('icons/general/locate@2x.png'),
-  enabledIcon: createImageIcon('icons/general/locate@2x.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/general/locate@2x.png',
+    darkModeUrl: 'icons/general/locate@2x.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/general/locate@2x.png',
+    darkModeUrl: 'icons/general/locate@2x.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Exit on-device inspector',
@@ -287,8 +358,14 @@ final enableOnDeviceInspector = ToggleableServiceExtensionDescription<bool>._(
 final structuredErrors = ToggleableServiceExtensionDescription<bool>._(
   extension: 'ext.flutter.inspector.structuredErrors',
   description: 'Show structured errors',
-  disabledIcon: createImageIcon('icons/perf/RedExcl@2x.png'),
-  enabledIcon: createImageIcon('icons/perf/RedExcl@2x.png'),
+  disabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/perf/RedExcl@2x.png',
+    darkModeUrl: 'icons/perf/RedExcl@2x.png',
+  ),
+  enabledIcon: const ImageIconCreator(
+    lightModeUrl: 'icons/perf/RedExcl@2x.png',
+    darkModeUrl: 'icons/perf/RedExcl@2x.png',
+  ),
   enabledValue: true,
   disabledValue: false,
   enabledTooltip: 'Disable structured errors for Flutter framework issues',

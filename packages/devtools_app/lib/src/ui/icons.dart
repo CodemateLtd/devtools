@@ -251,6 +251,24 @@ Image createImageIcon(String url, {double size = defaultIconSize}) {
   );
 }
 
+class ImageIconCreator extends StatelessWidget {
+
+  const ImageIconCreator({@required this.lightModeUrl, @required this.darkModeUrl});
+
+  final String lightModeUrl;
+  final String darkModeUrl;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Image(
+      image: theme.isDarkTheme ? AssetImage(darkModeUrl): AssetImage(lightModeUrl),
+      height: defaultIconSize,
+      width: defaultIconSize,
+    );
+  }
+}
+
 class Octicons {
   static const IconData bug = IconData(61714, fontFamily: 'Octicons');
   static const IconData info = IconData(61778, fontFamily: 'Octicons');
