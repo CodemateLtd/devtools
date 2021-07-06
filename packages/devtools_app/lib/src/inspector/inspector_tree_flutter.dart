@@ -628,7 +628,7 @@ class InspectorRowContent extends StatelessWidget {
     final node = row.node;
 
     Widget rowWidget = Padding(
-      padding: EdgeInsets.only(left: currentX),
+      padding: EdgeInsets.only(left: currentX + 4.0),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

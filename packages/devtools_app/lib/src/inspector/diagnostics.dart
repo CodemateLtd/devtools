@@ -75,21 +75,42 @@ class DiagnosticsNodeDescription extends StatelessWidget {
   }
 
   Widget buildDescription(
-    String description,
+    RemoteDiagnosticsNode description,
     TextStyle textStyle,
     ColorScheme colorScheme, {
     bool isProperty,
   }) {
-    return RichText(
-      overflow: TextOverflow.ellipsis,
-      text: TextSpan(
-        children: _buildDescriptionTextSpans(
-          description,
-          textStyle,
-          colorScheme,
-        ).toList(),
-      ),
-    );
+    if (description.description == 'Text') {
+      return Row(
+        children: [
+          RichText(
+            overflow: TextOverflow.ellipsis,
+            text: TextSpan(
+              children: _buildDescriptionTextSpans(
+                description.description,
+                textStyle,
+                colorScheme,
+              ).toList(),
+            ),
+          ),
+          Text(
+            description.description,
+            style: const TextStyle(color: Colors.greenAccent),
+          ),
+        ],
+      );
+    } else {
+      return RichText(
+        overflow: TextOverflow.ellipsis,
+        text: TextSpan(
+          children: _buildDescriptionTextSpans(
+            description.description,
+            textStyle,
+            colorScheme,
+          ).toList(),
+        ),
+      );
+    }
   }
 
   @override
@@ -171,7 +192,7 @@ class DiagnosticsNodeDescription extends StatelessWidget {
       // TODO(jacobr): custom display for units, iterables, and padding.
       children.add(Flexible(
         child: buildDescription(
-          description,
+          diagnostic,
           textStyle,
           colorScheme,
           isProperty: true,
@@ -216,7 +237,7 @@ class DiagnosticsNodeDescription extends StatelessWidget {
       }
 
       var diagnosticDescription = buildDescription(
-        diagnostic.description,
+        diagnostic,
         textStyle,
         colorScheme,
         isProperty: false,
