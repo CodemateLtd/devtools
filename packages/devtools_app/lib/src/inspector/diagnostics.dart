@@ -160,7 +160,7 @@ class DiagnosticsNodeDescription extends StatelessWidget {
     final defaultStyle = DefaultTextStyle.of(context).style;
     final baseStyle = style ?? defaultStyle;
     TextStyle textStyle = baseStyle.merge(textStyleForLevel(
-        diagnostic.level, colorScheme, diagnostic.description));
+        diagnostic.level, colorScheme, diagnostic.widgetRuntimeType));
     var descriptionTextStyle = textStyle;
     // TODO(jacobr): use TextSpans and SelectableText instead of Text.
     if (diagnostic.isProperty) {
