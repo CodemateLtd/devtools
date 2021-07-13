@@ -144,7 +144,7 @@ const dimensionIndicatorTextStyle = TextStyle(
 
 Color getWidgetColor(String widgetType) {
   if (widgetType == null) {
-    return Colors.grey;
+    return Colors.white;
   }
 
   switch (widgetType) {

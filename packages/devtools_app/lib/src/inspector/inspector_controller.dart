@@ -16,7 +16,6 @@ library inspector_controller;
 
 import 'dart:async';
 
-import 'package:devtools_app/src/inspector/layout_explorer/ui/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -52,7 +51,7 @@ TextStyle textStyleForLevel(
     case DiagnosticLevel.info:
     case DiagnosticLevel.fine:
     default:
-      return TextStyle(color: getWidgetColor(widgetType));
+      return inspector_text_styles.defaultStyle(widgetType);
   }
 }
 

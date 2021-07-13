@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
+import 'layout_explorer/ui/theme.dart';
 
 TextStyle unimportant(ColorScheme colorScheme) => TextStyle(
     color: colorScheme.isLight ? Colors.grey.shade500 : Colors.grey.shade600);
@@ -18,16 +19,22 @@ const regular = TextStyle(
 TextStyle warning(ColorScheme colorScheme) => TextStyle(
     color:
         colorScheme.isLight ? Colors.orange.shade900 : Colors.orange.shade400);
+
 TextStyle error(ColorScheme colorScheme) => TextStyle(
       color: colorScheme.isLight ? Colors.red.shade500 : Colors.red.shade400,
     );
+
 TextStyle link(ColorScheme colorScheme) => TextStyle(
       color: colorScheme.isLight ? Colors.blue.shade700 : Colors.blue.shade300,
       decoration: TextDecoration.underline,
     );
 
+TextStyle defaultStyle(String widgetType) =>
+    TextStyle(color: getWidgetColor(widgetType));
+
 const regularBold = TextStyle(fontWeight: FontWeight.w700);
 const regularItalic = TextStyle(fontStyle: FontStyle.italic);
+
 TextStyle unimportantItalic(ColorScheme colorScheme) =>
     unimportant(colorScheme).merge(const TextStyle(
       fontStyle: FontStyle.italic,
