@@ -5,6 +5,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'package:devtools_app/src/inspector/layout_explorer/ui/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -105,7 +106,8 @@ class HoverCard {
     final overlayState = Overlay.of(context);
     final colorScheme = Theme.of(context).colorScheme;
     final focusColor = Theme.of(context).focusColor;
-    final hoverHeading = colorScheme.hoverTitleTextStyle;
+    final hoverHeading = colorScheme.hoverTitleTextStyle
+        .merge(TextStyle(color: getWidgetColor(title)));
     final position = event.position;
 
     _overlayEntry = OverlayEntry(builder: (context) {

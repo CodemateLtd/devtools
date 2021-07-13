@@ -160,6 +160,9 @@ Color getWidgetColor(String widgetType) {
     case 'MaterialApp':
       return highLevelWidgetColor;
       break;
+    case 'RenderObjectToWidgetAdapter<RenderBox>':
+      return highLevelWidgetColor;
+      break;
     case '[root]':
       return highLevelWidgetColor;
       break;
