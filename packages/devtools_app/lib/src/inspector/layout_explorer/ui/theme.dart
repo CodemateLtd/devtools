@@ -54,17 +54,23 @@ const minHeightToAllowTruncating = 375.0;
 const minWidthToAllowTruncating = 375.0;
 
 // Story of Layout colors
-const mainAxisLightColor = Color(0xff2c5daa);
-const mainAxisDarkColor = Color(0xff2c5daa);
-const rowColor = Color(0xff2c5daa);
-const columnColor = Color(0xff77974d);
-const regularWidgetColor = Color(0xff88b1de);
 
-const selectedWidgetColor = Color(0xff36c6f4);
+//const rowColor = Color(0xff2c5daa);
+//const columnColor = Color(0xff77974d);
+//const regularWidgetColor = Color(0xff88b1de);
+
+const basicWidgetColor = Color(0xff06AE3C);
+const highLevelWidgetColor = Color(0xffAEAEB1);
+const animationAndMotionWidgetColor = Color(0xffE09D0E);
+const otherWidgetColor = Color(0xff0EA7E0);
+
+//const selectedWidgetColor = Color(0xff36c6f4);
 
 const textColor = Color(0xff55767f);
 const emphasizedTextColor = Color(0xff009aca);
 
+const mainAxisLightColor = Color(0xff2c5daa);
+const mainAxisDarkColor = Color(0xff2c5daa);
 const crossAxisLightColor = Color(0xff8ac652);
 const crossAxisDarkColor = Color(0xff8ac652);
 
@@ -135,6 +141,95 @@ const dimensionIndicatorTextStyle = TextStyle(
   letterSpacing: 1.1,
   color: emphasizedTextColor,
 );
+
+Color getWidgetColor(String widgetType) {
+  if (widgetType == null) {
+    return otherWidgetColor;
+  }
+
+  switch (widgetType) {
+    case 'Image':
+      return basicWidgetColor;
+      break;
+    case 'Icon':
+      return basicWidgetColor;
+      break;
+    case 'Text':
+      return basicWidgetColor;
+      break;
+    case 'MaterialApp':
+      return highLevelWidgetColor;
+      break;
+    case '[root]':
+      return highLevelWidgetColor;
+      break;
+    case 'AnimatedAlign':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedBuilder':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedContainer':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedCrossFade':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedDefaultTextStyle':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedListState':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedModalBarrier':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedOpacity':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedPhysicalModel':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedPositioned':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedSize':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedWidget':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'AnimatedWidgetBaseState':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'DecoratedBoxTransition':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'FadeTransition':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'Hero':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'PositionedTransition':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'RotationTransition':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'ScaleTransition':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'SizeTransition':
+      return animationAndMotionWidgetColor;
+      break;
+    case 'SlideTransition':
+      return animationAndMotionWidgetColor;
+      break;
+    default:
+      return otherWidgetColor;
+  }
+}
 
 TextStyle overflowingDimensionIndicatorTextStyle(ColorScheme colorScheme) =>
     dimensionIndicatorTextStyle.merge(

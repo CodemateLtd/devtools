@@ -127,9 +127,9 @@ class DiagnosticsNodeDescription extends StatelessWidget {
     }
     final String name = diagnostic.name;
 
-    TextStyle textStyle = DefaultTextStyle.of(context)
-        .style
-        .merge(textStyleForLevel(diagnostic.level, colorScheme));
+    TextStyle textStyle = DefaultTextStyle.of(context).style.merge(
+        textStyleForLevel(
+            diagnostic.level, colorScheme, diagnostic.description));
     if (diagnostic.isProperty) {
       // Display of inline properties.
       final String propertyType = diagnostic.propertyType;

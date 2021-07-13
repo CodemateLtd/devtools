@@ -16,6 +16,7 @@ library inspector_controller;
 
 import 'dart:async';
 
+import 'package:devtools_app/src/inspector/layout_explorer/ui/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -37,7 +38,8 @@ import 'inspector_tree.dart';
 
 const inspectorRefQueryParam = 'inspectorRef';
 
-TextStyle textStyleForLevel(DiagnosticLevel level, ColorScheme colorScheme) {
+TextStyle textStyleForLevel(
+    DiagnosticLevel level, ColorScheme colorScheme, String widgetType) {
   switch (level) {
     case DiagnosticLevel.hidden:
       return inspector_text_styles.unimportant(colorScheme);
@@ -49,7 +51,7 @@ TextStyle textStyleForLevel(DiagnosticLevel level, ColorScheme colorScheme) {
     case DiagnosticLevel.info:
     case DiagnosticLevel.fine:
     default:
-      return inspector_text_styles.regular;
+      return TextStyle(color: getWidgetColor(widgetType));
   }
 }
 
