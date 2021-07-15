@@ -101,6 +101,65 @@ class CustomIconMaker {
     return getCustomIcon(name, kind: IconKind.info);
   }
 
+  Icon getWidgetIcon(String widgetType) {
+    if (widgetType == null) {
+      return null;
+    }
+
+    switch (widgetType) {
+      case 'Image':
+        return const Icon(
+          Icons.image,
+          color: Colors.lightBlueAccent,
+        );
+        break;
+      case 'Icon':
+        return const Icon(
+          Icons.insert_emoticon,
+          color: Colors.lightBlueAccent,
+        );
+        break;
+      case 'Text':
+        return const Icon(
+          Icons.text_fields,
+          color: Colors.lightBlueAccent,
+        );
+        break;
+      case 'Column':
+        return const Icon(
+          Icons.view_week_outlined,
+          color: Colors.lightBlueAccent,
+        );
+        break;
+      case 'Row':
+        return const Icon(
+          Icons.table_rows_outlined,
+          color: Colors.lightBlueAccent,
+        );
+        break;
+      case 'Center':
+        return const Icon(
+          Icons.center_focus_strong,
+          color: Colors.lightBlueAccent,
+        );
+        break;
+      case 'Container':
+        return const Icon(
+          Icons.all_out_outlined,
+          color: Colors.lightBlueAccent,
+        );
+        break;
+      case 'FloatingActionButton':
+        return const Icon(
+          Icons.add_circle_outline,
+          color: Colors.lightBlueAccent,
+        );
+        break;
+      default:
+        return null;
+    }
+  }
+
   bool isAlphabetic(int char) {
     return (char < '0'.codeUnitAt(0) || char > '9'.codeUnitAt(0)) &&
         char != '_'.codeUnitAt(0) &&
