@@ -653,7 +653,9 @@ class InspectorRowContent extends StatelessWidget {
                     ),
                   ),
                 )
-              : const SizedBox(width: defaultSpacing, height: defaultSpacing),
+              : SizedBox(
+                  width: isDense() ? denseIconSize : defaultSpacing,
+                  height: isDense() ? denseIconSize : defaultSpacing),
           Expanded(
             child: DecoratedBox(
               decoration: BoxDecoration(
