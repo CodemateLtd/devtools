@@ -101,60 +101,354 @@ class CustomIconMaker {
     return getCustomIcon(name, kind: IconKind.info);
   }
 
-  Icon getWidgetIcon(String widgetType) {
+  ThemedImageIcon getWidgetIcon(String widgetType) {
     if (widgetType == null) {
       return null;
     }
 
-    switch (widgetType) {
-      case 'Image':
-        return const Icon(
-          Icons.image,
-          color: Colors.lightBlueAccent,
+    String widgetName;
+    if (widgetType.contains('<')) {
+      widgetName = widgetType.substring(0, widgetType.indexOf('<'));
+    } else {
+      widgetName = widgetType;
+    }
+
+    switch (widgetName) {
+      case 'Text':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
         );
         break;
       case 'Icon':
-        return const Icon(
-          Icons.insert_emoticon,
-          color: Colors.lightBlueAccent,
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
         );
         break;
-      case 'Text':
-        return const Icon(
-          Icons.text_fields,
-          color: Colors.lightBlueAccent,
-        );
-        break;
-      case 'Column':
-        return const Icon(
-          Icons.view_week_outlined,
-          color: Colors.lightBlueAccent,
-        );
-        break;
-      case 'Row':
-        return const Icon(
-          Icons.table_rows_outlined,
-          color: Colors.lightBlueAccent,
-        );
-        break;
-      case 'Center':
-        return const Icon(
-          Icons.center_focus_strong,
-          color: Colors.lightBlueAccent,
-        );
-        break;
-      case 'Container':
-        return const Icon(
-          Icons.all_out_outlined,
-          color: Colors.lightBlueAccent,
+      case 'Image':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
         );
         break;
       case 'FloatingActionButton':
-        return const Icon(
-          Icons.add_circle_outline,
-          color: Colors.lightBlueAccent,
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
         );
         break;
+      case 'Checkbox':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Radio':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Switch':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedAlign':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedBuilder':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedContainer':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedCrossFade':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedDefaultTextStyle':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedListState':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedModalBarrier':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedOpacity':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedPhysicalModel':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedPositioned':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedSize':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedWidget':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'AnimatedWidgetBaseState':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'DecoratedBoxTransition':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'FadeTransition':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'PositionedTransition':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'RotationTransition':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'ScaleTransition':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'SizeTransition':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'SlideTransition':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Hero':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Container':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Center':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Row':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Column':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Padding':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Scaffold':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'SizedBox':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'ConstrainedBox':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+        break;
+      case 'Expanded':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'Flex':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'Align':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'Positioned':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'SingleChildScrollView':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'Scrollable':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'Stack':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'InkWell':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'GestureDetector':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'TextButton':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'RaisedButton':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'OutlinedButton':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'GridView':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
+      case 'ListView':
+        //TODO: Change assets
+        return const ThemedImageIcon(
+          lightModeAsset: 'icons/repaints-dgrey.png',
+          darkModeAsset: 'icons/repaints-lgrey.png',
+        );
       default:
         return null;
     }
