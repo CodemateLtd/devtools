@@ -166,8 +166,8 @@ class CustomIconMaker {
       case 'Switch':
         //TODO: Change assets
         return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/switch.png',
-          darkModeAsset: 'icons/inspector/widget_icons/switch.png',
+          lightModeAsset: 'icons/inspector/widget_icons/toggle.png',
+          darkModeAsset: 'icons/inspector/widget_icons/toggle.png',
         );
         break;
       case 'AnimatedAlign':
