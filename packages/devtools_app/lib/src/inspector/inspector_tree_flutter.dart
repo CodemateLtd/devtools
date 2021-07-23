@@ -18,6 +18,7 @@ import '../error_badge_manager.dart';
 import '../theme.dart';
 import '../ui/colors.dart';
 import '../ui/utils.dart';
+import '../utils.dart';
 import 'diagnostics.dart';
 import 'diagnostics_node.dart';
 import 'inspector_tree.dart';
@@ -646,13 +647,15 @@ class InspectorRowContent extends StatelessWidget {
                   onTap: onToggle,
                   child: RotationTransition(
                     turns: expandArrowAnimation,
-                    child: const Icon(
+                    child: Icon(
                       Icons.expand_more,
-                      size: defaultIconSize,
+                      size: isDense() ? denseIconSize : defaultIconSize,
                     ),
                   ),
                 )
-              : const SizedBox(width: defaultSpacing, height: defaultSpacing),
+              : SizedBox(
+                  width: isDense() ? denseIconSize : defaultSpacing,
+                  height: isDense() ? denseIconSize : defaultSpacing),
           Expanded(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -669,7 +672,6 @@ class InspectorRowContent extends StatelessWidget {
                 },
                 child: Container(
                   height: rowHeight,
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: DiagnosticsNodeDescription(
                     node.diagnostic,
                     isSelected: row.isSelected,
