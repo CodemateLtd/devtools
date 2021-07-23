@@ -101,7 +101,7 @@ class CustomIconMaker {
     return getCustomIcon(name, kind: IconKind.info);
   }
 
-  ThemedImageIcon getWidgetIcon(String widgetType) {
+  AssetImageIcon getWidgetIcon(String widgetType) {
     if (widgetType == null) {
       return null;
     }
@@ -115,346 +115,244 @@ class CustomIconMaker {
 
     switch (widgetName) {
       case 'RenderObjectToWidgetAdapter':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/root.png',
-          darkModeAsset: 'icons/inspector/widget_icons/root.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/root.png',
         );
         break;
       case 'Text':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/text.png',
-          darkModeAsset: 'icons/inspector/widget_icons/text.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/text.png',
         );
         break;
       case 'Icon':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/icon.png',
-          darkModeAsset: 'icons/inspector/widget_icons/icon.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/icon.png',
         );
         break;
       case 'Image':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/image.png',
-          darkModeAsset: 'icons/inspector/widget_icons/image.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/image.png',
         );
         break;
       case 'FloatingActionButton':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/floatingab.png',
-          darkModeAsset: 'icons/inspector/widget_icons/floatingab.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/floatingab.png',
         );
         break;
       case 'Checkbox':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/checkbox.png',
-          darkModeAsset: 'icons/inspector/widget_icons/checkbox.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/checkbox.png',
         );
         break;
       case 'Radio':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/radio.png',
-          darkModeAsset: 'icons/inspector/widget_icons/radio.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/radio.png',
         );
         break;
       case 'Switch':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/toggle.png',
-          darkModeAsset: 'icons/inspector/widget_icons/toggle.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/toggle.png',
         );
         break;
       case 'AnimatedAlign':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedBuilder':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedContainer':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedCrossFade':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedDefaultTextStyle':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedListState':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedModalBarrier':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedOpacity':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedPhysicalModel':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedPositioned':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedSize':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedWidget':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'AnimatedWidgetBaseState':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/animated.png',
-          darkModeAsset: 'icons/inspector/widget_icons/animated.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/animated.png',
         );
         break;
       case 'DecoratedBoxTransition':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/transition.png',
-          darkModeAsset: 'icons/inspector/widget_icons/transition.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/transition.png',
         );
         break;
       case 'FadeTransition':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/transition.png',
-          darkModeAsset: 'icons/inspector/widget_icons/transition.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/transition.png',
         );
         break;
       case 'PositionedTransition':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/transition.png',
-          darkModeAsset: 'icons/inspector/widget_icons/transition.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/transition.png',
         );
         break;
       case 'RotationTransition':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/transition.png',
-          darkModeAsset: 'icons/inspector/widget_icons/transition.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/transition.png',
         );
         break;
       case 'ScaleTransition':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/transition.png',
-          darkModeAsset: 'icons/inspector/widget_icons/transition.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/transition.png',
         );
         break;
       case 'SizeTransition':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/transition.png',
-          darkModeAsset: 'icons/inspector/widget_icons/transition.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/transition.png',
         );
         break;
       case 'SlideTransition':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/transition.png',
-          darkModeAsset: 'icons/inspector/widget_icons/transition.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/transition.png',
         );
         break;
       case 'Hero':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/hero.png',
-          darkModeAsset: 'icons/inspector/widget_icons/hero.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/hero.png',
         );
         break;
       case 'Container':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/container.png',
-          darkModeAsset: 'icons/inspector/widget_icons/container.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/container.png',
         );
         break;
       case 'Center':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/center.png',
-          darkModeAsset: 'icons/inspector/widget_icons/center.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/center.png',
         );
         break;
       case 'Row':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/row.png',
-          darkModeAsset: 'icons/inspector/widget_icons/row.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/row.png',
         );
         break;
       case 'Column':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/column.png',
-          darkModeAsset: 'icons/inspector/widget_icons/column.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/column.png',
         );
         break;
       case 'Padding':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/padding.png',
-          darkModeAsset: 'icons/inspector/widget_icons/padding.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/padding.png',
         );
         break;
       case 'Scaffold':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/scaffold.png',
-          darkModeAsset: 'icons/inspector/widget_icons/scaffold.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/scaffold.png',
         );
         break;
       case 'SizedBox':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/sizedbox.png',
-          darkModeAsset: 'icons/inspector/widget_icons/sizedbox.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/sizedbox.png',
         );
       case 'ConstrainedBox':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/sizedbox.png',
-          darkModeAsset: 'icons/inspector/widget_icons/sizedbox.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/sizedbox.png',
         );
         break;
       case 'Expanded':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/sizedbox.png',
-          darkModeAsset: 'icons/inspector/widget_icons/sizedbox.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/sizedbox.png',
         );
       case 'Flex':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/sizedbox.png',
-          darkModeAsset: 'icons/inspector/widget_icons/sizedbox.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/sizedbox.png',
         );
       case 'Align':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/align.png',
-          darkModeAsset: 'icons/inspector/widget_icons/align.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/align.png',
         );
       case 'Positioned':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/align.png',
-          darkModeAsset: 'icons/inspector/widget_icons/align.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/align.png',
         );
       case 'SingleChildScrollView':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/scroll.png',
-          darkModeAsset: 'icons/inspector/widget_icons/scroll.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/scroll.png',
         );
       case 'Scrollable':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/scroll.png',
-          darkModeAsset: 'icons/inspector/widget_icons/scroll.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/scroll.png',
         );
       case 'Stack':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/stack.png',
-          darkModeAsset: 'icons/inspector/widget_icons/stack.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/stack.png',
         );
       case 'InkWell':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/inkwell.png',
-          darkModeAsset: 'icons/inspector/widget_icons/inkwell.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/inkwell.png',
         );
       case 'GestureDetector':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/gesture.png',
-          darkModeAsset: 'icons/inspector/widget_icons/gesture.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/gesture.png',
         );
       case 'TextButton':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/textbutton.png',
-          darkModeAsset: 'icons/inspector/widget_icons/textbutton.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/textbutton.png',
         );
       case 'RaisedButton':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/textbutton.png',
-          darkModeAsset: 'icons/inspector/widget_icons/textbutton.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/textbutton.png',
         );
       case 'OutlinedButton':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/outlinedbutton.png',
-          darkModeAsset: 'icons/inspector/widget_icons/outlinedbutton.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/outlinedbutton.png',
         );
       case 'GridView':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/gridview.png',
-          darkModeAsset: 'icons/inspector/widget_icons/gridview.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/gridview.png',
         );
       case 'ListView':
-        //TODO: Change assets
-        return const ThemedImageIcon(
-          lightModeAsset: 'icons/inspector/widget_icons/listview.png',
-          darkModeAsset: 'icons/inspector/widget_icons/listview.png',
+        return const AssetImageIcon(
+          asset: 'icons/inspector/widget_icons/listview.png',
         );
       default:
         return null;
