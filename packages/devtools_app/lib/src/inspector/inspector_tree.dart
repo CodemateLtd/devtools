@@ -42,9 +42,9 @@ extension InspectorColorScheme on ColorScheme {
       isLight ? Colors.yellowAccent : const Color.fromARGB(255, 70, 73, 76);
 }
 
-double get iconPadding => isDense() ? 0.0 : 4.0;
+const double iconPadding = 4.0;
 const double chartLineStrokeWidth = 1.0;
-double get columnWidth => isDense() ? 12 : 16.0;
+const double columnWidth = 16.0;
 double get verticalPadding => scaleByFontFactor(10.0);
 double get rowHeight => scaleByFontFactor(isDense() ? 20.0 : 24.0);
 
