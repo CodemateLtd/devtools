@@ -76,7 +76,7 @@ class CustomIconMaker {
     });
   }
 
-  CustomIcon fromWidgetName(String name) {
+  Widget fromWidgetName(String name) {
     if (name == null) {
       return null;
     }
@@ -95,7 +95,7 @@ class CustomIconMaker {
     );
   }
 
-  CustomIcon fromInfo(String name) {
+  Widget fromInfo(String name) {
     if (name == null) {
       return null;
     }
@@ -363,7 +363,7 @@ class WidgetIcons {
     'ListView': listView,
   };
 
-  static const String root = 'icons/inspector/widget_icons/textbutton.png';
+  static const String root = 'icons/inspector/widget_icons/root.png';
   static const String text = 'icons/inspector/widget_icons/text.png';
   static const String icon = 'icons/inspector/widget_icons/icon.png';
   static const String image = 'icons/inspector/widget_icons/image.png';
