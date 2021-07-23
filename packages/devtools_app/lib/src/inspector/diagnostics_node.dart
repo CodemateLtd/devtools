@@ -614,13 +614,6 @@ class RemoteDiagnosticsNode extends DiagnosticableTree {
   Widget get icon {
     if (isProperty) return null;
 
-    final AssetImageIcon widgetIcon =
-        iconMaker.getWidgetIcon(widgetRuntimeType);
-
-    if (widgetIcon != null) {
-      return widgetIcon;
-    }
-
     return iconMaker.fromWidgetName(widgetRuntimeType);
   }
 

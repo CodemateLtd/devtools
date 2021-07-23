@@ -53,18 +53,24 @@ class CustomIcon extends StatelessWidget {
 }
 
 class CustomIconMaker {
-  final Map<String, CustomIcon> iconCache = {};
+  final Map<String, Widget> iconCache = {};
 
-  CustomIcon getCustomIcon(String fromText,
+  Widget getCustomIcon(String fromText,
       {IconKind kind, bool isAbstract = false}) {
     kind ??= IconKind.classIcon;
     if (fromText?.isEmpty != false) {
       return null;
     }
 
+    final asset = WidgetIcons.getAssetName(fromText);
+    if (asset != null) {
+      return iconCache.putIfAbsent(fromText, () {
+        return AssetImageIcon(asset: asset);
+      });
+    }
+
     final String text = fromText[0].toUpperCase();
     final String mapKey = '${text}_${kind.name}_$isAbstract';
-
     return iconCache.putIfAbsent(mapKey, () {
       return CustomIcon(kind: kind, text: text, isAbstract: isAbstract);
     });
@@ -99,264 +105,6 @@ class CustomIconMaker {
     }
 
     return getCustomIcon(name, kind: IconKind.info);
-  }
-
-  AssetImageIcon getWidgetIcon(String widgetType) {
-    if (widgetType == null) {
-      return null;
-    }
-
-    String widgetName;
-    if (widgetType.contains('<')) {
-      widgetName = widgetType.substring(0, widgetType.indexOf('<'));
-    } else {
-      widgetName = widgetType;
-    }
-
-    switch (widgetName) {
-      case 'RenderObjectToWidgetAdapter':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/root.png',
-        );
-        break;
-      case 'Text':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/text.png',
-        );
-        break;
-      case 'Icon':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/icon.png',
-        );
-        break;
-      case 'Image':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/image.png',
-        );
-        break;
-      case 'FloatingActionButton':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/floatingab.png',
-        );
-        break;
-      case 'Checkbox':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/checkbox.png',
-        );
-        break;
-      case 'Radio':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/radio.png',
-        );
-        break;
-      case 'Switch':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/toggle.png',
-        );
-        break;
-      case 'AnimatedAlign':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedBuilder':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedContainer':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedCrossFade':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedDefaultTextStyle':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedListState':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedModalBarrier':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedOpacity':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedPhysicalModel':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedPositioned':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedSize':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedWidget':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'AnimatedWidgetBaseState':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/animated.png',
-        );
-        break;
-      case 'DecoratedBoxTransition':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/transition.png',
-        );
-        break;
-      case 'FadeTransition':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/transition.png',
-        );
-        break;
-      case 'PositionedTransition':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/transition.png',
-        );
-        break;
-      case 'RotationTransition':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/transition.png',
-        );
-        break;
-      case 'ScaleTransition':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/transition.png',
-        );
-        break;
-      case 'SizeTransition':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/transition.png',
-        );
-        break;
-      case 'SlideTransition':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/transition.png',
-        );
-        break;
-      case 'Hero':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/hero.png',
-        );
-        break;
-      case 'Container':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/container.png',
-        );
-        break;
-      case 'Center':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/center.png',
-        );
-        break;
-      case 'Row':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/row.png',
-        );
-        break;
-      case 'Column':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/column.png',
-        );
-        break;
-      case 'Padding':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/padding.png',
-        );
-        break;
-      case 'Scaffold':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/scaffold.png',
-        );
-        break;
-      case 'SizedBox':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/sizedbox.png',
-        );
-      case 'ConstrainedBox':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/sizedbox.png',
-        );
-        break;
-      case 'Expanded':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/sizedbox.png',
-        );
-      case 'Flex':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/sizedbox.png',
-        );
-      case 'Align':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/align.png',
-        );
-      case 'Positioned':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/align.png',
-        );
-      case 'SingleChildScrollView':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/scroll.png',
-        );
-      case 'Scrollable':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/scroll.png',
-        );
-      case 'Stack':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/stack.png',
-        );
-      case 'InkWell':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/inkwell.png',
-        );
-      case 'GestureDetector':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/gesture.png',
-        );
-      case 'TextButton':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/textbutton.png',
-        );
-      case 'RaisedButton':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/textbutton.png',
-        );
-      case 'OutlinedButton':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/outlinedbutton.png',
-        );
-      case 'GridView':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/gridview.png',
-        );
-      case 'ListView':
-        return const AssetImageIcon(
-          asset: 'icons/inspector/widget_icons/listview.png',
-        );
-      default:
-        return null;
-    }
   }
 
   bool isAlphabetic(int char) {
@@ -541,6 +289,111 @@ class ThemedImageIcon extends StatelessWidget {
       width: defaultIconSize,
     );
   }
+}
+
+class WidgetIcons {
+  static String getAssetName(String widgetType) {
+    if (widgetType == null) {
+      return null;
+    }
+
+    return _iconMap[_stripBrackets(widgetType)];
+  }
+
+  static String _stripBrackets(String widgetType) {
+    final bracketIndex = widgetType.indexOf('<');
+    if (bracketIndex == -1) {
+      return widgetType;
+    }
+
+    return widgetType.substring(0, bracketIndex);
+  }
+
+  static const Map<String, String> _iconMap = {
+    'RenderObjectToWidgetAdapter': root,
+    'Text': text,
+    'Icon': icon,
+    'Image': icon,
+    'FloatingActionButton': floatingActionButton,
+    'Checkbox': checkbox,
+    'Radio': radio,
+    'Switch': toggle,
+    'AnimatedAlign': animated,
+    'AnimatedBuilder': animated,
+    'AnimatedContainer': animated,
+    'AnimatedCrossFade': animated,
+    'AnimatedDefaultTextStyle': animated,
+    'AnimatedListState': animated,
+    'AnimatedModalBarrier': animated,
+    'AnimatedOpacity': animated,
+    'AnimatedPhysicalModel': animated,
+    'AnimatedPositioned': animated,
+    'AnimatedSize': animated,
+    'AnimatedWidget': animated,
+    'AnimatedWidgetBaseState': animated,
+    'DecoratedBoxTransition': transition,
+    'FadeTransition': transition,
+    'PositionedTransition': transition,
+    'RotationTransition': transition,
+    'ScaleTransition': transition,
+    'SizeTransition': transition,
+    'SlideTransition': transition,
+    'Hero': hero,
+    'Container': container,
+    'Center': center,
+    'Row': row,
+    'Column': column,
+    'Padding': padding,
+    'Scaffold': scaffold,
+    'SizedBox': sizedBox,
+    'ConstrainedBox': sizedBox,
+    'Expanded': sizedBox,
+    'Flex': sizedBox,
+    'Align': align,
+    'Positioned': align,
+    'SingleChildScrollView': scroll,
+    'Scrollable': scroll,
+    'Stack': stack,
+    'InkWell': inkWell,
+    'GestureDetector': gesture,
+    'TextButton': textButton,
+    'RaisedButton': textButton,
+    'OutlinedButton': outlinedButton,
+    'GridView': gridView,
+    'ListView': listView,
+  };
+
+  static const String root = 'icons/inspector/widget_icons/textbutton.png';
+  static const String text = 'icons/inspector/widget_icons/text.png';
+  static const String icon = 'icons/inspector/widget_icons/icon.png';
+  static const String image = 'icons/inspector/widget_icons/image.png';
+  static const String floatingActionButton =
+      'icons/inspector/widget_icons/floatingab.png';
+  static const String checkbox = 'icons/inspector/widget_icons/checkbox.png';
+  static const String radio = 'icons/inspector/widget_icons/radio.png';
+  static const String toggle = 'icons/inspector/widget_icons/toggle.png';
+  static const String animated = 'icons/inspector/widget_icons/animated.png';
+  static const String transition =
+      'icons/inspector/widget_icons/transition.png';
+  static const String hero = 'icons/inspector/widget_icons/hero.png';
+  static const String container = 'icons/inspector/widget_icons/container.png';
+  static const String center = 'icons/inspector/widget_icons/center.png';
+  static const String row = 'icons/inspector/widget_icons/row.png';
+  static const String column = 'icons/inspector/widget_icons/column.png';
+  static const String padding = 'icons/inspector/widget_icons/padding.png';
+  static const String scaffold = 'icons/inspector/widget_icons/scaffold.png';
+  static const String sizedBox = 'icons/inspector/widget_icons/sizedbox.png';
+  static const String align = 'icons/inspector/widget_icons/align.png';
+  static const String scroll = 'icons/inspector/widget_icons/scroll.png';
+  static const String stack = 'icons/inspector/widget_icons/stack.png';
+  static const String inkWell = 'icons/inspector/widget_icons/inkwell.png';
+  static const String gesture = 'icons/inspector/widget_icons/gesture.png';
+  static const String textButton =
+      'icons/inspector/widget_icons/textButton.png';
+  static const String outlinedButton =
+      'icons/inspector/widget_icons/outlinedbutton.png';
+  static const String gridView = 'icons/inspector/widget_icons/gridview.png';
+  static const String listView = 'icons/inspector/widget_icons/listView.png';
 }
 
 class Octicons {
