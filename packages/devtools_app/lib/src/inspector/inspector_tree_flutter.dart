@@ -636,6 +636,7 @@ class InspectorRowContent extends StatelessWidget {
     }
 
     final node = row.node;
+    final iconSize = isDense() ? denseIconSize : defaultIconSize;
 
     Widget rowWidget = Padding(
       padding: EdgeInsets.only(left: currentX),
@@ -647,15 +648,10 @@ class InspectorRowContent extends StatelessWidget {
                   onTap: onToggle,
                   child: RotationTransition(
                     turns: expandArrowAnimation,
-                    child: Icon(
-                      Icons.expand_more,
-                      size: isDense() ? denseIconSize : defaultIconSize,
-                    ),
+                    child: Icon(Icons.expand_more, size: iconSize),
                   ),
                 )
-              : SizedBox(
-                  width: isDense() ? denseIconSize : defaultSpacing,
-                  height: isDense() ? denseIconSize : defaultSpacing),
+              : SizedBox(width: iconSize, height: iconSize),
           Expanded(
             child: DecoratedBox(
               decoration: BoxDecoration(
