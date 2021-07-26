@@ -215,7 +215,7 @@ class _BoxLayoutExplorerWidgetState extends LayoutExplorerWidgetState<
           height: constraints.maxHeight,
           decoration: BoxDecoration(
             border: Border.all(
-              color: regularWidgetColor,
+              color: WidgetColors.getColor(properties.node.description),
             ),
           ),
           child: Stack(
