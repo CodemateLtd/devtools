@@ -145,6 +145,7 @@ const smallButtonHeight = 20.0;
 const buttonMinWidth = 36.0;
 
 const defaultIconSize = 16.0;
+const denseIconSize = 11.0;
 const actionsIconSize = 20.0;
 
 const defaultSpacing = 16.0;

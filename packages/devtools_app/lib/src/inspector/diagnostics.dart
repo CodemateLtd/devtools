@@ -51,7 +51,7 @@ class DiagnosticsNodeDescription extends StatelessWidget {
 
   Widget _paddedIcon(Widget icon) {
     return Padding(
-      padding: const EdgeInsets.only(right: iconPadding),
+      padding: EdgeInsets.only(right: iconPadding),
       child: icon,
     );
   }
