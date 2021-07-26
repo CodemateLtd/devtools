@@ -152,13 +152,10 @@ class WidgetVisualizer extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final properties = layoutProperties;
     Color borderColor = WidgetColors.getColor(properties.node.description);
-    /* if (properties is FlexLayoutProperties) {
-      borderColor =
-          properties?.direction == Axis.horizontal ? rowColor : columnColor;
-    }*/
-    /*   if (isSelected) {
+
+    if (isSelected) {
       borderColor = selectedWidgetColor;
-    }*/
+    }
     return Container(
       child: Stack(
         children: [
