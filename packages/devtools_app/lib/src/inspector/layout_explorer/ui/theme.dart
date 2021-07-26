@@ -157,3 +157,90 @@ Widget buildUnderline() {
     ),
   );
 }
+
+class WidgetColors {
+  static Color getColor(String widgetType) {
+    if (widgetType == null) {
+      return otherWidgetColor;
+    }
+
+    final Color color = _colorMap[_stripBrackets(widgetType)];
+
+    if (color != null) {
+      return color;
+    } else {
+      return otherWidgetColor;
+    }
+  }
+
+  // Strips the brackets of the widget
+  // Expected input for example: AnimatedBuilder<String> => AnimatedBuilder
+  static String _stripBrackets(String widgetType) {
+    final bracketIndex = widgetType.indexOf('<');
+    if (bracketIndex == -1) {
+      return widgetType;
+    }
+
+    return widgetType.substring(0, bracketIndex);
+  }
+
+  static const Map<String, Color> _colorMap = {
+    'RenderObjectToWidgetAdapter': highLevelWidgetColor,
+    'MaterialApp': highLevelWidgetColor,
+    'Text': basicWidgetColor,
+    'Icon': basicWidgetColor,
+    'Image': basicWidgetColor,
+    'FloatingActionButton': otherWidgetColor,
+    'Checkbox': otherWidgetColor,
+    'Radio': otherWidgetColor,
+    'Switch': otherWidgetColor,
+    'AnimatedAlign': animationAndMotionWidgetColor,
+    'AnimatedBuilder': animationAndMotionWidgetColor,
+    'AnimatedContainer': animationAndMotionWidgetColor,
+    'AnimatedCrossFade': animationAndMotionWidgetColor,
+    'AnimatedDefaultTextStyle': animationAndMotionWidgetColor,
+    'AnimatedListState': animationAndMotionWidgetColor,
+    'AnimatedModalBarrier': animationAndMotionWidgetColor,
+    'AnimatedOpacity': animationAndMotionWidgetColor,
+    'AnimatedPhysicalModel': animationAndMotionWidgetColor,
+    'AnimatedPositioned': animationAndMotionWidgetColor,
+    'AnimatedSize': animationAndMotionWidgetColor,
+    'AnimatedWidget': animationAndMotionWidgetColor,
+    'AnimatedWidgetBaseState': animationAndMotionWidgetColor,
+    'DecoratedBoxTransition': animationAndMotionWidgetColor,
+    'FadeTransition': animationAndMotionWidgetColor,
+    'PositionedTransition': animationAndMotionWidgetColor,
+    'RotationTransition': animationAndMotionWidgetColor,
+    'ScaleTransition': animationAndMotionWidgetColor,
+    'SizeTransition': animationAndMotionWidgetColor,
+    'SlideTransition': animationAndMotionWidgetColor,
+    'Hero': animationAndMotionWidgetColor,
+    'Container': otherWidgetColor,
+    'Center': otherWidgetColor,
+    'Row': otherWidgetColor,
+    'Column': otherWidgetColor,
+    'Padding': otherWidgetColor,
+    'Scaffold': otherWidgetColor,
+    'SizedBox': otherWidgetColor,
+    'ConstrainedBox': otherWidgetColor,
+    'Expanded': otherWidgetColor,
+    'Flex': otherWidgetColor,
+    'Align': otherWidgetColor,
+    'Positioned': otherWidgetColor,
+    'SingleChildScrollView': otherWidgetColor,
+    'Scrollable': otherWidgetColor,
+    'Stack': otherWidgetColor,
+    'InkWell': otherWidgetColor,
+    'GestureDetector': otherWidgetColor,
+    'TextButton': otherWidgetColor,
+    'RaisedButton': otherWidgetColor,
+    'OutlinedButton': otherWidgetColor,
+    'GridView': otherWidgetColor,
+    'ListView': otherWidgetColor,
+  };
+
+  static const basicWidgetColor = Color(0xff06AE3C);
+  static const highLevelWidgetColor = Color(0xffAEAEB1);
+  static const animationAndMotionWidgetColor = Color(0xffE09D0E);
+  static const otherWidgetColor = Color(0xff0EA7E0);
+}
