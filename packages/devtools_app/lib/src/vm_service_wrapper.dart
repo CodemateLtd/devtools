@@ -435,7 +435,7 @@ class VmServiceWrapper implements VmService {
           tokenPos: tokenPos,
           endTokenPos: endTokenPos,
           forceCompile: forceCompile,
-          reportLines: reportLines,
+          //reportLines: reportLines,
         ));
   }
 

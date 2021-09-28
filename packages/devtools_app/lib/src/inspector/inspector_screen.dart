@@ -232,8 +232,8 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
           extensions.invertOversizedImages,
         ],
       ),
-      // TODO(jacobr): implement TogglePlatformSelector.
-      //  TogglePlatformSelector().selector
+      const SizedBox(width: denseSpacing),
+      ServiceExtensionSelector(extensions: [extensions.togglePlatformMode]),
     ];
   }
 

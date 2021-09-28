@@ -19,6 +19,7 @@ import '../service_extensions.dart';
 import '../service_registrations.dart';
 import '../theme.dart';
 import '../utils.dart';
+import 'icons.dart';
 import 'label.dart';
 
 /// Group of buttons where each button toggles the state of a VMService
@@ -43,17 +44,25 @@ class ServiceExtensionButtonGroup extends StatefulWidget {
 }
 
 /// Data class tracking the state of a single service extension.
-class ExtensionState {
-  ExtensionState(this.description);
+class ExtensionStateToggleable {
+  ExtensionStateToggleable(this.description);
 
   final ToggleableServiceExtensionDescription description;
   bool isSelected = false;
   bool isAvailable = false;
 }
 
+/// Data class tracking the state of a single service extension.
+class ExtensionState {
+  ExtensionState(this.description);
+
+  final ServiceExtensionDescription description;
+  bool isAvailable = false;
+}
+
 class _ServiceExtensionButtonGroupState
     extends State<ServiceExtensionButtonGroup> with AutoDisposeMixin {
-  List<ExtensionState> _extensionStates;
+  List<ExtensionStateToggleable> _extensionStates;
 
   @override
   void initState() {
@@ -65,7 +74,9 @@ class _ServiceExtensionButtonGroupState
   }
 
   void _initExtensionState() {
-    _extensionStates = [for (var e in widget.extensions) ExtensionState(e)];
+    _extensionStates = [
+      for (var e in widget.extensions) ExtensionStateToggleable(e)
+    ];
 
     for (var extension in _extensionStates) {
       // Listen for changes to the state of each service extension using the
@@ -136,7 +147,7 @@ class _ServiceExtensionButtonGroupState
     );
   }
 
-  Widget _buildExtension(ExtensionState extensionState) {
+  Widget _buildExtension(ExtensionStateToggleable extensionState) {
     final description = extensionState.description;
 
     return ServiceExtensionTooltip(
@@ -606,100 +617,109 @@ class ServiceExtensionRichTooltip extends StatelessWidget {
   }
 }
 
-// TODO(jacobr): port these classes to Flutter.
-/*
 /// Dropdown selector that calls a service extension.
-///
 /// Service extensions can be found in [service_extensions.dart].
-class ServiceExtensionSelector {
-  ServiceExtensionSelector(this.extensionDescription) : selector = PSelect() {
-    selector
-      ..small()
-      ..clazz('button-bar-dropdown')
-      ..change(_handleSelect)
-      ..tooltip = extensionDescription.tooltips.first ??
-          extensionDescription.description;
+class ServiceExtensionSelector extends StatefulWidget {
+  const ServiceExtensionSelector({@required this.extensions}) : super();
 
-    final extensionName = extensionDescription.extension;
+  final List<ServiceExtensionDescription<String>> extensions;
 
-    // Disable selector for unavailable service extensions.
-    selector.disabled = !serviceManager.serviceExtensionManager
-        .isServiceExtensionAvailable(extensionName);
-    serviceManager.serviceExtensionManager.hasServiceExtension(
-        extensionName, (available) => selector.disabled = !available);
+  @override
+  _ServiceExtensionSelectorState createState() =>
+      _ServiceExtensionSelectorState();
+}
 
-    addOptions();
-    updateState();
+class _ServiceExtensionSelectorState extends State<ServiceExtensionSelector>
+    with AutoDisposeMixin {
+  List<String> _listValues = [];
+  String dropdownValue;
+  int _initialIndex = 0;
+  List<ExtensionState> _extensionStates;
+  List<DropdownMenuItem> _listDropdownItems;
+
+  @override
+  void initState() {
+    super.initState();
+    _initExtensionState();
   }
 
-  final ServiceExtensionDescription extensionDescription;
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    // TODO(jacobr): respect _available better by displaying whether individual
+    // widgets are available (not currently supported by ToggleButtons).
 
-  final PSelect selector;
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const AssetImageIcon(asset: 'icons/phone@2x.png'),
+      style: TextStyle(
+        color: theme.colorScheme.serviceExtensionButtonsTitle,
+      ),
+      onChanged: (String newValue) {
+        setState(() {
+          dropdownValue = newValue;
+          final int currentIndex = _listValues.indexOf(newValue);
+          if (currentIndex != -1) {
+            _initialIndex = currentIndex;
+          }
+        });
 
-  String _selectedValue;
-
-  void _handleSelect() {
-    if (selector.value == _selectedValue) return;
-
-    ga.select(extensionDescription.gaScreenName, extensionDescription.gaItem);
-
-    final extensionValue = extensionDescription
-        .values[extensionDescription.displayValues.indexOf(selector.value)];
-
-    serviceManager.serviceExtensionManager.setServiceExtensionState(
-      extensionDescription.extension,
-      true,
-      extensionValue,
+        _extensionStateChanged(newValue);
+      },
+      items: _listDropdownItems,
     );
-
-    _selectedValue = selector.value;
   }
 
-  void addOptions() {
-    extensionDescription.displayValues.forEach(selector.option);
+  void _initExtensionState() {
+    _extensionStates = [for (var e in widget.extensions) ExtensionState(e)];
+    _listValues = widget.extensions.first.displayValues;
+    _listDropdownItems =
+        _listValues.map<DropdownMenuItem<String>>((String value) {
+      return DropdownMenuItem<String>(
+        value: value,
+        child: Text(value),
+      );
+    }).toList();
+    dropdownValue = widget.extensions.first.displayValues[_initialIndex];
+
+    for (var extension in _extensionStates) {
+      // Listen for changes to the state of each service extension using the
+      // VMServiceManager.
+      final extensionName = extension.description.extension;
+
+      // Track whether the extension is actually exposed by the VM.
+      final listenable = serviceManager.serviceExtensionManager
+          .hasServiceExtension(extensionName);
+      extension.isAvailable = listenable.value;
+      addAutoDisposeListener(
+        listenable,
+        () {
+          setState(() {
+            extension.isAvailable = listenable.value;
+          });
+        },
+      );
+    }
   }
 
-  void updateState() {
-    // Select option whose state is already enabled.
-    serviceManager.serviceExtensionManager
-        .getServiceExtensionState(extensionDescription.extension, (state) {
-      updateSelection(state);
-    });
-  }
+  void _extensionStateChanged(String newValue) {
+    final extensionState = _extensionStates[_initialIndex];
+    if (extensionState.isAvailable) {
+      setState(() {
+        ga.select(
+          extensionState.description.gaScreenName,
+          extensionState.description.gaItem,
+        );
+      });
 
-  void updateSelection(ServiceExtensionState state) {
-    if (state.value != null) {
-      final selectedIndex = extensionDescription.values.indexOf(state.value);
-      selector.selectedIndex = selectedIndex;
-      _selectedValue = extensionDescription.displayValues[selectedIndex];
+      serviceManager.serviceExtensionManager.setServiceExtensionState(
+          extensionState.description.extension,
+          true,
+          extensionState.description.values[_initialIndex]);
+    } else {
+      // TODO(jacobr): display a toast warning that the extension is
+      // not available. That could happen as entire groups have to
+      // be enabled or disabled at a time.
     }
   }
 }
-
-class TogglePlatformSelector extends ServiceExtensionSelector {
-  TogglePlatformSelector() : super(togglePlatformMode);
-
-  static const fuchsia = 'Fuchsia';
-
-  @override
-  void addOptions() {
-    extensionDescription.displayValues
-        .where((displayValue) => !displayValue.contains(fuchsia))
-        .forEach(selector.option);
-  }
-
-  @override
-  void updateState() {
-    // Select option whose state is already enabled.
-    serviceManager.serviceExtensionManager
-        .getServiceExtensionState(extensionDescription.extension, (state) {
-      if (state.value == fuchsia.toLowerCase()) {
-        selector.option(extensionDescription.displayValues
-            .firstWhere((displayValue) => displayValue.contains(fuchsia)));
-      }
-      updateSelection(state);
-    });
-  }
-}
-
- */
