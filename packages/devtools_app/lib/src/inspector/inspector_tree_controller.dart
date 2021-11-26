@@ -102,6 +102,10 @@ class _InspectorTreeRowState extends State<_InspectorTreeRowWidget>
 
 class InspectorTreeController extends Object
     with SearchControllerMixin<InspectorTreeRow> {
+  InspectorTreeController(this.inspectorTreeController);
+
+  final InspectorTreeController inspectorTreeController;
+
   /// Clients the controller notifies to trigger changes to the UI.
   final Set<InspectorControllerClient> _clients = {};
 
@@ -208,6 +212,27 @@ class InspectorTreeController extends Object
 
   double getRowOffset(int index) {
     return (getCachedRow(index)?.depth ?? 0) * columnWidth;
+  }
+
+  List<InspectorTreeRow> getPathFromSelectedRowToRoot() {
+    final selectedItem = cachedRows.firstWhere(
+      (element) => element.isSelected,
+      orElse: () => null,
+    );
+    if (selectedItem == null) return [];
+
+    final pathToRoot = <InspectorTreeRow>[selectedItem];
+    InspectorTreeNode nextParentNode = selectedItem.node.parent;
+    while (nextParentNode != null) {
+      final rowItem = cachedRows.firstWhere(
+        (element) => element.node == nextParentNode,
+        orElse: null,
+      );
+      if (rowItem == null) break;
+      pathToRoot.add(rowItem);
+      nextParentNode = rowItem.node.parent;
+    }
+    return pathToRoot.reversed.toList();
   }
 
   set hover(InspectorTreeNode node) {

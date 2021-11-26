@@ -110,9 +110,12 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
       // The app must not be a Flutter app.
       return;
     }
+    // TODO find a better to access all cached rows than this
+    final inspectorTreeController = InspectorTreeController(null);
+    final detailsTree = InspectorTreeController(inspectorTreeController);
     inspectorController = InspectorController(
-      inspectorTree: InspectorTreeController(),
-      detailsTree: InspectorTreeController(),
+      inspectorTree: inspectorTreeController,
+      detailsTree: detailsTree,
       treeType: FlutterTreeType.widget,
       onExpandCollapseSupported: _onExpandCollapseSupported,
       onLayoutExplorerSupported: _onLayoutExplorerSupported,
