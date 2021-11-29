@@ -21,17 +21,19 @@ class InspectorBreadcrumbNavigator extends StatelessWidget {
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
       itemBuilder: (context, index) {
         final item = items[index];
+        final isSelected = index == items.length - 1;
         return _InspectorBreadcrumb(
           data: item,
-          isSelected: index == items.length - 1,
-          onTap: () => onTap(item.row),
+          isSelected: isSelected,
+          onTap: isSelected ? null : () => onTap(item.row),
         );
       },
       separatorBuilder: (context, index) {
         return Icon(
-          Icons.chevron_right_rounded,
+          Icons.chevron_right,
           size: defaultIconSize,
         );
       },
