@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../devtools_app.dart';
+import 'inspector_text_styles.dart';
 
 class InspectorBreadcrumbNavigator extends StatelessWidget {
   const InspectorBreadcrumbNavigator({
@@ -16,18 +17,7 @@ class InspectorBreadcrumbNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<_InspectorBreadcrumbData> rows =
-        _rows.map((e) => _InspectorBreadcrumbData(e)).toList();
-    List<_InspectorBreadcrumbData> items;
-    if (rows.length > 5) {
-      items = []
-        ..add(rows[0])
-        ..add(_InspectorBreadcrumbData.more())
-        ..addAll(rows.sublist(rows.length - 4, rows.length));
-    } else {
-      items = rows;
-    }
-
+    final items = _getRows();
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
@@ -46,6 +36,19 @@ class InspectorBreadcrumbNavigator extends StatelessWidget {
         );
       },
     );
+  }
+
+  List<_InspectorBreadcrumbData> _getRows() {
+    final List<_InspectorBreadcrumbData> rows =
+        _rows.map((e) => _InspectorBreadcrumbData(e)).toList();
+    if (rows.length > 5) {
+      return []
+        ..add(rows[0])
+        ..add(_InspectorBreadcrumbData.more())
+        ..addAll(rows.sublist(rows.length - 4, rows.length));
+    } else {
+      return rows;
+    }
   }
 }
 
@@ -66,10 +69,12 @@ class _InspectorBreadcrumb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (data.row == null) {
-      return const Text('…');
+      return Text(
+        '…',
+        style: regular,
+      );
     }
 
-    // TODO text style
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(4),
@@ -102,7 +107,10 @@ class _InspectorBreadcrumbData {
 
   final InspectorTreeRow row;
 
-  Text get text => Text(row.node.diagnostic.description);
+  Text get text => Text(
+        row.node.diagnostic.description,
+        style: regular,
+      );
 
   Widget get icon => Padding(
         padding: const EdgeInsets.only(right: iconPadding),
