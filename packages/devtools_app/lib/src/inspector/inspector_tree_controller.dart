@@ -26,6 +26,7 @@ import '../ui/search.dart';
 import '../ui/utils.dart';
 import 'diagnostics.dart';
 import 'diagnostics_node.dart';
+import 'inspector_breadcrumbs.dart';
 import 'inspector_text_styles.dart' as inspector_text_styles;
 import 'inspector_tree.dart';
 
@@ -1001,6 +1002,7 @@ class _InspectorTreeState extends State<InspectorTree>
       return const SizedBox();
     }
 
+    final bool shouldShowBreadcrumbs = !widget.isSummaryTree;
     return LayoutBuilder(
       builder: (context, constraints) {
         final viewportWidth = constraints.maxWidth;
@@ -1033,6 +1035,19 @@ class _InspectorTreeState extends State<InspectorTree>
                       itemExtent: rowHeight,
                       childrenDelegate: SliverChildBuilderDelegate(
                         (context, index) {
+                          if (shouldShowBreadcrumbs && index == 0) {
+                            final parents = controller.inspectorTreeController
+                                .getPathFromSelectedRowToRoot();
+                            return InspectorBreadcrumbNavigator(
+                              rows: parents,
+                              onTap: (InspectorTreeRow) {
+                                // TODO
+                              },
+                            );
+                          }
+
+                          if (shouldShowBreadcrumbs) index = index - 1;
+
                           if (index == controller.numRows) {
                             return SizedBox(height: rowHeight);
                           }
@@ -1053,7 +1068,9 @@ class _InspectorTreeState extends State<InspectorTree>
                             debuggerController: widget.debuggerController,
                           );
                         },
-                        childCount: controller.numRows + 1,
+                        childCount: controller.numRows +
+                            1 +
+                            (shouldShowBreadcrumbs ? 1 : 0),
                       ),
                       controller: _scrollControllerY,
                     ),
