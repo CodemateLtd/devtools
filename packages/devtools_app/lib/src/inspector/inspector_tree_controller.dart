@@ -1002,11 +1002,10 @@ class _InspectorTreeState extends State<InspectorTree>
       return const SizedBox();
     }
 
-    final bool shouldShowBreadcrumbs = !widget.isSummaryTree;
     return LayoutBuilder(
       builder: (context, constraints) {
         final viewportWidth = constraints.maxWidth;
-        return Scrollbar(
+        final Widget tree = Scrollbar(
           isAlwaysShown: true,
           controller: _scrollControllerX,
           child: SingleChildScrollView(
@@ -1035,18 +1034,6 @@ class _InspectorTreeState extends State<InspectorTree>
                       itemExtent: rowHeight,
                       childrenDelegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          if (shouldShowBreadcrumbs && index == 0) {
-                            final parents = controller.inspectorTreeController
-                                .getPathFromSelectedRowToRoot();
-                            return InspectorBreadcrumbNavigator(
-                              rows: parents,
-                              onTap: (row) => controller.inspectorTreeController
-                                  .onSelectRow(row),
-                            );
-                          }
-
-                          if (shouldShowBreadcrumbs) index = index - 1;
-
                           if (index == controller.numRows) {
                             return SizedBox(height: rowHeight);
                           }
@@ -1067,9 +1054,7 @@ class _InspectorTreeState extends State<InspectorTree>
                             debuggerController: widget.debuggerController,
                           );
                         },
-                        childCount: controller.numRows +
-                            1 +
-                            (shouldShowBreadcrumbs ? 1 : 0),
+                        childCount: controller.numRows + 1,
                       ),
                       controller: _scrollControllerY,
                     ),
@@ -1079,6 +1064,24 @@ class _InspectorTreeState extends State<InspectorTree>
             ),
           ),
         );
+
+        final bool shouldShowBreadcrumbs = !widget.isSummaryTree;
+        if (shouldShowBreadcrumbs) {
+          final parents =
+              controller.inspectorTreeController.getPathFromSelectedRowToRoot();
+          return Column(
+            children: [
+              InspectorBreadcrumbNavigator(
+                rows: parents,
+                onTap: (row) =>
+                    controller.inspectorTreeController.onSelectRow(row),
+              ),
+              Expanded(child: tree),
+            ],
+          );
+        }
+
+        return tree;
       },
     );
   }

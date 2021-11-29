@@ -18,25 +18,28 @@ class InspectorBreadcrumbNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = _getRows();
-    return ListView.separated(
-      scrollDirection: Axis.horizontal,
-      itemCount: items.length,
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-      itemBuilder: (context, index) {
-        final item = items[index];
-        final isSelected = index == items.length - 1;
-        return _InspectorBreadcrumb(
-          data: item,
-          isSelected: isSelected,
-          onTap: isSelected ? null : () => onTap(item.row),
-        );
-      },
-      separatorBuilder: (context, index) {
-        return Icon(
-          Icons.chevron_right,
-          size: defaultIconSize,
-        );
-      },
+    return SizedBox(
+      height: 32, // TODO smaller when dense mode is on
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: items.length,
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+        itemBuilder: (context, index) {
+          final item = items[index];
+          final isSelected = index == items.length - 1;
+          return _InspectorBreadcrumb(
+            data: item,
+            isSelected: isSelected,
+            onTap: isSelected ? null : () => onTap(item.row),
+          );
+        },
+        separatorBuilder: (context, index) {
+          return Icon(
+            Icons.chevron_right,
+            size: defaultIconSize,
+          );
+        },
+      ),
     );
   }
 
@@ -70,18 +73,28 @@ class _InspectorBreadcrumb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = regular.copyWith(fontSize: 12);
     if (data.row == null) {
       return Text(
         '…',
-        style: regular,
+        style: textStyle,
       );
     }
+
+    final text = Text(
+      data.text,
+      style: textStyle,
+    );
+    final icon = Padding(
+      padding: const EdgeInsets.only(right: iconPadding),
+      child: data.icon,
+    );
 
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(4),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
           color: isSelected
@@ -89,10 +102,7 @@ class _InspectorBreadcrumb extends StatelessWidget {
               : Colors.transparent,
         ),
         child: Row(
-          children: [
-            data.icon,
-            data.text,
-          ],
+          children: [icon, text],
         ),
       ),
     );
@@ -109,13 +119,7 @@ class _InspectorBreadcrumbData {
 
   final InspectorTreeRow row;
 
-  Text get text => Text(
-        row.node.diagnostic.description,
-        style: regular,
-      );
+  String get text => row.node.diagnostic.description;
 
-  Widget get icon => Padding(
-        padding: const EdgeInsets.only(right: iconPadding),
-        child: row.node.diagnostic.icon,
-      );
+  Widget get icon => row.node.diagnostic.icon;
 }
