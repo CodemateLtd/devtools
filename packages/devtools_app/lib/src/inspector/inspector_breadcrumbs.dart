@@ -19,7 +19,7 @@ class InspectorBreadcrumbNavigator extends StatelessWidget {
   Widget build(BuildContext context) {
     final items = _getRows();
     return SizedBox(
-      height: 32, // TODO smaller when dense mode is on
+      height: isDense() ? 24 : 32,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
@@ -67,42 +67,43 @@ class _InspectorBreadcrumb extends StatelessWidget {
         assert(isSelected != null),
         super(key: key);
 
+  static const BorderRadius _borderRadius =
+      BorderRadius.all(Radius.circular(4));
+
   final _InspectorBreadcrumbData data;
   final bool isSelected;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = regular.copyWith(fontSize: 12);
-    if (data.row == null) {
-      return Text(
-        '…',
-        style: textStyle,
-      );
-    }
-
     final text = Text(
       data.text,
-      style: textStyle,
-    );
-    final icon = Padding(
-      padding: const EdgeInsets.only(right: iconPadding),
-      child: data.icon,
+      style: regular.copyWith(fontSize: scaleByFontFactor(12.0)),
     );
 
+    final icon = data.icon != null
+        ? Padding(
+            padding: const EdgeInsets.only(right: iconPadding),
+            child: data.icon,
+          )
+        : null;
+
     return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(4),
+      onTap: data.row == null ? null : onTap,
+      borderRadius: _borderRadius,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: _borderRadius,
           color: isSelected
               ? Theme.of(context).colorScheme.selectedRowBackgroundColor
               : Colors.transparent,
         ),
         child: Row(
-          children: [icon, text],
+          children: [
+            if (icon != null) icon,
+            text,
+          ],
         ),
       ),
     );
@@ -112,14 +113,14 @@ class _InspectorBreadcrumb extends StatelessWidget {
 class _InspectorBreadcrumbData {
   const _InspectorBreadcrumbData(this.row);
 
-  /// Construct a special item that shows that there are more items between rows
+  /// Construct a special item for showing '…' symbol between other items
   factory _InspectorBreadcrumbData.more() {
     return const _InspectorBreadcrumbData(null);
   }
 
   final InspectorTreeRow row;
 
-  String get text => row.node.diagnostic.description;
+  String get text => row == null ? '…' : row.node.diagnostic.description;
 
-  Widget get icon => row.node.diagnostic.icon;
+  Widget get icon => row == null ? null : row.node.diagnostic.icon;
 }
