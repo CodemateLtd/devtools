@@ -1040,9 +1040,8 @@ class _InspectorTreeState extends State<InspectorTree>
                                 .getPathFromSelectedRowToRoot();
                             return InspectorBreadcrumbNavigator(
                               rows: parents,
-                              onTap: (InspectorTreeRow) {
-                                // TODO
-                              },
+                              onTap: (row) => controller.inspectorTreeController
+                                  .onSelectRow(row),
                             );
                           }
 
