@@ -6,13 +6,12 @@ import 'inspector_text_styles.dart';
 class InspectorBreadcrumbNavigator extends StatefulWidget {
   const InspectorBreadcrumbNavigator({
     Key key,
-    @required List<InspectorTreeRow> rows,
+    @required this.rows,
     @required this.onTap,
   })  : assert(rows != null),
-        _rows = rows,
         super(key: key);
 
-  final List<InspectorTreeRow> _rows;
+  final List<InspectorTreeRow> rows;
   final Function(InspectorTreeRow) onTap;
 
   @override
@@ -38,7 +37,7 @@ class _InspectorBreadcrumbNavigatorState
 
   @override
   Widget build(BuildContext context) {
-    if (widget._rows.isEmpty) {
+    if (widget.rows.isEmpty) {
       return const SizedBox();
     }
 
@@ -49,7 +48,7 @@ class _InspectorBreadcrumbNavigatorState
       }
     });
 
-    final items = _getRows();
+    final items = _getBreadcrumbs(widget.rows);
     return SizedBox(
       height: isDense() ? 24 : 32,
       child: ListView.separated(
@@ -76,16 +75,16 @@ class _InspectorBreadcrumbNavigatorState
     );
   }
 
-  List<_InspectorBreadcrumbData> _getRows() {
-    final List<_InspectorBreadcrumbData> rows =
-        widget._rows.map((e) => _InspectorBreadcrumbData(e)).toList();
-    if (rows.length > 5) {
+  List<_InspectorBreadcrumbData> _getBreadcrumbs(List<InspectorTreeRow> rows) {
+    final List<_InspectorBreadcrumbData> items =
+        rows.map((e) => _InspectorBreadcrumbData(e)).toList();
+    if (items.length > 5) {
       return []
-        ..add(rows[0])
+        ..add(items[0])
         ..add(_InspectorBreadcrumbData.more())
-        ..addAll(rows.sublist(rows.length - 4, rows.length));
+        ..addAll(items.sublist(items.length - 4, items.length));
     } else {
-      return rows;
+      return items;
     }
   }
 }
