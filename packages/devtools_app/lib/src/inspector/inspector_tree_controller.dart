@@ -103,9 +103,7 @@ class _InspectorTreeRowState extends State<_InspectorTreeRowWidget>
 
 class InspectorTreeController extends Object
     with SearchControllerMixin<InspectorTreeRow> {
-  InspectorTreeController(this.inspectorTreeController);
-
-  final InspectorTreeController inspectorTreeController;
+  InspectorTreeController();
 
   /// Clients the controller notifies to trigger changes to the UI.
   final Set<InspectorControllerClient> _clients = {};
@@ -145,6 +143,7 @@ class InspectorTreeController extends Object
 
   InspectorTreeNode get root => _root;
   InspectorTreeNode _root;
+
   set root(InspectorTreeNode node) {
     setState(() {
       _root = node;
@@ -748,11 +747,13 @@ class InspectorTree extends StatefulWidget {
     Key key,
     @required this.controller,
     @required this.debuggerController,
+    this.inspectorTreeController,
     this.isSummaryTree = false,
     this.widgetErrors,
   }) : super(key: key);
 
   final InspectorTreeController controller;
+  final InspectorTreeController inspectorTreeController;
   final DebuggerController debuggerController;
   final bool isSummaryTree;
   final LinkedHashMap<String, InspectableWidgetError> widgetErrors;
@@ -769,6 +770,7 @@ class _InspectorTreeState extends State<InspectorTree>
         AutoDisposeMixin
     implements InspectorControllerClient {
   InspectorTreeController get controller => widget.controller;
+
   bool get isSummaryTree => widget.isSummaryTree;
 
   ScrollController _scrollControllerY;
@@ -1068,13 +1070,12 @@ class _InspectorTreeState extends State<InspectorTree>
         final bool shouldShowBreadcrumbs = !widget.isSummaryTree;
         if (shouldShowBreadcrumbs) {
           final parents =
-              controller.inspectorTreeController.getPathFromSelectedRowToRoot();
+              widget.inspectorTreeController.getPathFromSelectedRowToRoot();
           return Column(
             children: [
               InspectorBreadcrumbNavigator(
                 rows: parents,
-                onTap: (row) =>
-                    controller.inspectorTreeController.onSelectRow(row),
+                onTap: (row) => widget.inspectorTreeController.onSelectRow(row),
               ),
               Expanded(child: tree),
             ],

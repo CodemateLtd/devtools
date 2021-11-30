@@ -110,9 +110,8 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
       // The app must not be a Flutter app.
       return;
     }
-    // TODO find a better to access all cached rows than this
-    final inspectorTreeController = InspectorTreeController(null);
-    final detailsTree = InspectorTreeController(inspectorTreeController);
+    final inspectorTreeController = InspectorTreeController();
+    final detailsTree = InspectorTreeController();
     inspectorController = InspectorController(
       inspectorTree: inspectorTreeController,
       detailsTree: detailsTree,
@@ -165,6 +164,7 @@ class InspectorScreenBodyState extends State<InspectorScreenBody>
       key: detailsTreeKey,
       controller: detailsTreeController,
       debuggerController: _debuggerController,
+      inspectorTreeController: summaryTreeController,
     );
 
     final splitAxis = Split.axisFor(context, 0.85);
