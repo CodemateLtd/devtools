@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../devtools_app.dart';
 import 'inspector_text_styles.dart';
 
-class InspectorBreadcrumbNavigator extends StatelessWidget {
+class InspectorBreadcrumbNavigator extends StatefulWidget {
   const InspectorBreadcrumbNavigator({
     Key key,
     @required List<InspectorTreeRow> rows,
@@ -16,11 +16,44 @@ class InspectorBreadcrumbNavigator extends StatelessWidget {
   final Function(InspectorTreeRow) onTap;
 
   @override
+  State<InspectorBreadcrumbNavigator> createState() =>
+      _InspectorBreadcrumbNavigatorState();
+}
+
+class _InspectorBreadcrumbNavigatorState
+    extends State<InspectorBreadcrumbNavigator> {
+  ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (widget._rows.isEmpty) {
+      return const SizedBox();
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Scroll to the end of the list so the last breadcrumb is always visible
+      if (_scrollController.hasClients) {
+        _scrollController.autoScrollToBottom();
+      }
+    });
+
     final items = _getRows();
     return SizedBox(
       height: isDense() ? 24 : 32,
       child: ListView.separated(
+        controller: _scrollController,
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
         padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -30,7 +63,7 @@ class InspectorBreadcrumbNavigator extends StatelessWidget {
           return _InspectorBreadcrumb(
             data: item,
             isSelected: isSelected,
-            onTap: isSelected ? null : () => onTap(item.row),
+            onTap: isSelected ? null : () => widget.onTap(item.row),
           );
         },
         separatorBuilder: (context, index) {
@@ -45,7 +78,7 @@ class InspectorBreadcrumbNavigator extends StatelessWidget {
 
   List<_InspectorBreadcrumbData> _getRows() {
     final List<_InspectorBreadcrumbData> rows =
-        _rows.map((e) => _InspectorBreadcrumbData(e)).toList();
+        widget._rows.map((e) => _InspectorBreadcrumbData(e)).toList();
     if (rows.length > 5) {
       return []
         ..add(rows[0])
