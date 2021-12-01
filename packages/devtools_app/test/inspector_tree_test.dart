@@ -41,6 +41,7 @@ void main() {
       await tester.pumpWidget(wrap(InspectorTree(
         controller: controller,
         debuggerController: debuggerController,
+        inspectorTreeController: InspectorTreeController(),
       )));
 
       expect(controller.getRow(const Offset(0, -100.0)), isNull);
@@ -53,6 +54,7 @@ void main() {
       await tester.pumpWidget(wrap(InspectorTree(
         controller: controller,
         debuggerController: debuggerController,
+        inspectorTreeController: InspectorTreeController(),
       )));
 
       expect(controller.getRow(const Offset(0, -20)).index, 0);
@@ -77,6 +79,7 @@ void main() {
       await tester.pumpWidget(wrap(InspectorTree(
         controller: treeController,
         debuggerController: TestDebuggerController(),
+        inspectorTreeController: InspectorTreeController(),
       )));
 
       expect(find.richText('Text: "Content"'), findsOneWidget);
@@ -99,6 +102,7 @@ void main() {
       await tester.pumpWidget(wrap(InspectorTree(
         controller: treeController,
         debuggerController: TestDebuggerController(),
+        inspectorTreeController: InspectorTreeController(),
       )));
 
       expect(find.richText('Text: "Rich text"'), findsOneWidget);
@@ -117,6 +121,7 @@ void main() {
         wrap(InspectorTree(
           controller: treeController,
           debuggerController: TestDebuggerController(),
+          inspectorTreeController: InspectorTreeController(),
         )),
       );
 
