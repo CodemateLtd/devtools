@@ -750,7 +750,9 @@ class InspectorTree extends StatefulWidget {
     this.inspectorTreeController,
     this.isSummaryTree = false,
     this.widgetErrors,
-  }) : super(key: key);
+  })  : assert(isSummaryTree && inspectorTreeController == null ||
+            !isSummaryTree && inspectorTreeController != null),
+        super(key: key);
 
   final InspectorTreeController controller;
   final InspectorTreeController inspectorTreeController;
